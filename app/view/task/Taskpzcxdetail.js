@@ -1,6 +1,6 @@
-Ext.define('Zixweb.view.yspz.yspzq.Detail', {
+Ext.define('Zixweb.view.task.Taskpzcxdetail', {
 	extend : 'Ext.grid.Panel',
-	alias : 'widget.yspzqdetail',
+	alias : 'widget.taskpzcxdetail',
 	disableSelection : true,
 	hideHeaders : true,
 	height : 540,
@@ -39,20 +39,12 @@ Ext.define('Zixweb.view.yspz.yspzq.Detail', {
 				'</td>',
 				'</tr>',
 				'</tpl>',
-				"<tpl if='revoke_flag != 0'>",
 				'<tr>',
 				'<td class="ice_one">撤销原因</td>',
 				'<td class="ice_two" colspan="3">',
 				'<textarea rows="2" class="textarea" disabled="true">{revoke_cause}</textarea>',
 				'</td>',
 				'</tr>',
-				'</tpl>',
-				"<tpl if='revoke_flag == 0'>",
-				'<tr><td class="ice_one-0" colspan="4">',
-				'<input type="button" value="撤销" id="revoke_button"/>',
-				'</td>',
-				'</tr>',
-				'</tpl>',
 				'</table>',
 				'</tpl>',
 				'<tpl if="!isdetail">',
@@ -115,13 +107,24 @@ Ext.define('Zixweb.view.yspz.yspzq.Detail', {
 	initComponent : function() {
 		var grid = this;
 		var store = new Ext.data.Store({
-			model : 'Zixweb.model.yspz.yspzq.Detail',
+			fields : ['title', 'ys_type', 'cause', 'memo', 'revoke_flag',
+					'revoke_cause', 'period', 'ys_id', 'properties', 'j_book',
+					'd_book', 'isdetail', 'j_amt', 'd_amt'],
 			proxy : {
 				type : 'ajax',
 				url : 'yspzq/detail'
 			},
 			listeners : {
-				load : function() {
+				load : function(thiz, records, successful, eOpts) {
+					if (!successful) {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '数据加载失败,请联系管理员',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
+						return;
+					}
 					var expander = grid.getPlugin('rowexpander');
 					for (i = 0; i < grid.getStore().getCount(); i++) {
 						expander.toggleRow(i, grid.getStore().getAt(i));
