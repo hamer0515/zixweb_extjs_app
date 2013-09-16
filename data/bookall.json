@@ -1,0 +1,305 @@
+[{
+			"text" : "资产类-1",
+			"d" : 0,
+			"children" : [{
+						"text" : "应收银行-1020",
+						"d" : 0,
+						"children" : [{
+									"text" : "待勾兑应收交易款-1020.01",
+									"url" : "txamt_dgd",
+									"d" : 123123123,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "已核应收银行款-1020.03",
+									"url" : "bamt_yhys",
+									"d" : 123123120,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "已核应收银行手续费-1020.04",
+									"url" : "bfee_yhys",
+									"d" : 0,
+									"j" : 1231230,
+									"leaf" : true
+								}, {
+									"text" : "已核应收交易款-1020.02",
+									"url" : "txamt_yhys",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}],
+						"j" : 0
+					}, {
+						"text" : "银行存款-1002",
+						"d" : 0,
+						"children" : [{
+									"text" : "备付金存款-1002.01",
+									"url" : "deposit_bfj",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "自有资金存款-1002.02",
+									"url" : "deposit_zyzj",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}],
+						"j" : 0
+					}, {
+						"text" : "其他应收款-1221",
+						"d" : 0,
+						"children" : [{
+									"text" : "待确认交易款-1221.01",
+									"url" : "txamt_dqr_oys",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}],
+						"j" : 0
+					}, {
+						"text" : "应收账款-1122",
+						"d" : 0,
+						"children" : [{
+									"text" : "客户-1122.01",
+									"d" : 0,
+									"children" : [{
+												"text" : "分润方承担品牌费-1122.01.002",
+												"url" : "lfee_psp",
+												"d" : 0,
+												"j" : 0,
+												"leaf" : true
+											}, {
+												"text" : "定期划付客户手续费-1122.01.001",
+												"url" : "cfee_dqhf",
+												"d" : 0,
+												"j" : 0,
+												"leaf" : true
+											}],
+									"j" : 0
+								}, {
+									"text" : "银行-1122.02",
+									"d" : 0,
+									"children" : [{
+												"text" : "自有资金银行短款-1122.02.002",
+												"url" : "bsc_zyzj",
+												"d" : 0,
+												"j" : 0,
+												"leaf" : true
+											}, {
+												"text" : "备付金银行短款-1122.02.001",
+												"url" : "bsc",
+												"d" : 0,
+												"j" : 0,
+												"leaf" : true
+											}],
+									"j" : 0
+								}],
+						"j" : 0
+					}],
+			"j" : 0
+		}, {
+			"text" : "往来类-3",
+			"d" : 0,
+			"children" : [{
+						"text" : "往来-3001",
+						"d" : 0,
+						"children" : [{
+									"text" : "应收备付-3001.01",
+									"url" : "wlzj_ysbf",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "应付备付-3001.03",
+									"url" : "wlzj_yfbf",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "应付自有-3001.04",
+									"url" : "wlzj_yfzy",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "应收自有-3001.02",
+									"url" : "wlzj_yszy",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}],
+						"j" : 0
+					}],
+			"j" : 0
+		}, {
+			"text" : "汇总",
+			"d" : 0,
+			"j" : 0,
+			"leaf" : true
+		}, {
+			"text" : "负债类-2",
+			"d" : 0,
+			"children" : [{
+						"text" : "应付账款-2202",
+						"d" : 0,
+						"children" : [{
+									"text" : "银行-2202.01",
+									"d" : 0,
+									"children" : [{
+												"text" : "自有资金银行长款-2202.01.002",
+												"url" : "blc_zyzj",
+												"d" : 0,
+												"j" : 0,
+												"leaf" : true
+											}, {
+												"text" : "暂估周期确认银行手续费-2202.01.004",
+												"url" : "bfee_zqqr_zg",
+												"d" : 0,
+												"j" : 0,
+												"leaf" : true
+											}, {
+												"text" : "周期确认银行手续费-2202.01.005",
+												"url" : "bfee_zqqr",
+												"d" : 0,
+												"j" : 0,
+												"leaf" : true
+											}, {
+												"text" : "财务外付银行手续费-2202.01.003",
+												"url" : "bfee_cwwf",
+												"d" : 0,
+												"j" : 0,
+												"leaf" : true
+											}, {
+												"text" : "备份金银行长款-2202.01.001",
+												"url" : "blc",
+												"d" : 0,
+												"j" : 0,
+												"leaf" : true
+											}],
+									"j" : 0
+								}],
+						"j" : 0
+					}, {
+						"text" : "应付银行-2005",
+						"d" : 0,
+						"children" : [{
+									"text" : "已核应付交易款-2005.01",
+									"url" : "txamt_yhyf",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "已核应付银行手续费-2005.03",
+									"url" : "bfee_yhyf",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "待确认应付交易款-2005.04",
+									"url" : "txamt_dqr_byf",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "已核应付银行款-2005.02",
+									"url" : "bamt_yhyf",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}],
+						"j" : 0
+					}, {
+						"text" : "其他应付款-2241",
+						"d" : 0,
+						"children" : [{
+									"text" : "待确认交易款-2241.01",
+									"url" : "txamt_dqr_oyf",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}],
+						"j" : 0
+					}, {
+						"text" : "预收账款-2203",
+						"d" : 0,
+						"children" : [{
+									"text" : "客户备付金-2203.01",
+									"url" : "bfj_cust",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}],
+						"j" : 0
+					}],
+			"j" : 0
+		}, {
+			"text" : "损益类-5",
+			"d" : 0,
+			"children" : [{
+						"text" : "收入-6021",
+						"d" : 0,
+						"children" : [{
+									"text" : "客户手续费收入-6021.01",
+									"url" : "income_cfee",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}],
+						"j" : 0
+					}, {
+						"text" : "内部收入-6022",
+						"url" : "income_in",
+						"d" : 0,
+						"j" : 0,
+						"leaf" : true
+					}, {
+						"text" : "内部成本-6422",
+						"url" : "cost_in",
+						"d" : 0,
+						"j" : 0,
+						"leaf" : true
+					}, {
+						"text" : "财务费用-6603",
+						"d" : 0,
+						"children" : [{
+									"text" : "账户利息收入-6603.01",
+									"url" : "income_zhlx",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "金融机构手续费-6603.02",
+									"url" : "fee_jrjg",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}],
+						"j" : 0
+					}, {
+						"text" : "成本-6421",
+						"d" : 0,
+						"children" : [{
+									"text" : "银行手续费支出-6421.01",
+									"url" : "cost_bfee",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "暂估银行手续费-6421.03",
+									"url" : "cost_bfee_zg",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}, {
+									"text" : "垫付损失-6421.02",
+									"url" : "cost_dfss",
+									"d" : 0,
+									"j" : 0,
+									"leaf" : true
+								}],
+						"j" : 0
+					}],
+			"j" : 0
+		}]

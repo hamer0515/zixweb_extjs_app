@@ -1,0 +1,17 @@
+[{
+			"url" : "1",
+			"text" : "Phil",
+			"leaf" : true
+		}, {
+			"url" : "2",
+			"text" : "Nico",
+			"children" : [{
+						"url" : "3",
+						"text" : "Mitchell",
+						"leaf" : true
+					}]
+		}, {
+			"url" : "4",
+			"text" : "Sue",
+			"leaf" : true
+		}]
