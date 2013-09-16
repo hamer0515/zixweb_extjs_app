@@ -73,6 +73,9 @@ Ext.application({
 							},
 							success : function(response) {
 								valiStatus = Ext.decode(response.responseText).success;
+							},
+							failure : function(response, opts) {
+								Ext.MessageBox.alert('服务器出错，请联系管理人员');
 							}
 						});
 				return valiStatus;

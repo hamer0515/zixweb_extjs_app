@@ -227,7 +227,7 @@ Ext.define('Zixweb.view.book.hist.deposit_bfj', {
 										var rec = grid.getStore()
 												.getAt(rowIndex);
 										var viewport = grid.up('viewport'), center = viewport
-												.down('center'), id = 'book_detail_'
+												.down('center'), id = 'yspzq_detail_'
 												+ rec.data.ys_type
 												+ rec.data.ys_id, cmp = Ext
 												.getCmp(id);
@@ -246,7 +246,7 @@ Ext.define('Zixweb.view.book.hist.deposit_bfj', {
 												closable : true,
 												xtype : 'panel',
 												items : yspzqdetail,
-												id : 'book_detail_'
+												id : 'yspzq_detail_'
 														+ rec.data.ys_type
 														+ rec.data.ys_id,
 												title : Ext.String

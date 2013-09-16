@@ -29,21 +29,10 @@ Ext.define('Zixweb.view.pzlr.job', {
 							if (!successful) {
 								Ext.MessageBox.show({
 											title : '警告',
-											msg : '数据加载失败',
+											msg : '数据加载失败,请联系管理员',
 											buttons : Ext.Msg.YES,
 											icon : Ext.Msg.ERROR
 										});
-							}
-							for (var i in records) {
-								var rec = records[i];
-								var jstatus = parseInt(rec.data.jstatus);
-								if (jstatus == 1) {
-									rec.color = 'yellow';
-								} else if (jstatus == 2) {
-									rec.color = 'green';
-								} else if (jstatus == -1) {
-									rec.color = 'red';
-								}
 							}
 						}
 					}

@@ -21,7 +21,7 @@ Ext.define('Zixweb.view.North', {
 						}, {
 							xtype : 'image',
 							border : false,
-							src : '../images/logout.jpg',
+							src : '../images/door_in.png',
 							margin : "0 0 0 800"
 						}, {
 							xtype : 'displayfield',

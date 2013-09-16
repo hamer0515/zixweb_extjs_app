@@ -1,6 +1,6 @@
-Ext.define('Zixweb.view.yspz.yspzq.Detail', {
+Ext.define('Zixweb.view.task.Taskpzcxdetail', {
 	extend : 'Ext.grid.Panel',
-	alias : 'widget.yspzqdetail',
+	alias : 'widget.taskpzcxdetail',
 	disableSelection : true,
 	hideHeaders : true,
 	height : 540,
@@ -11,6 +11,40 @@ Ext.define('Zixweb.view.yspz.yspzq.Detail', {
 		expandOnDblClick : false,
 		selectRowOnExpand : true,
 		rowBodyTpl : new Ext.XTemplate(
+				'<tpl if="isverify">',
+				"<table width='95%' border='0' cellspacing='1' cellpadding='0' align='center' bgcolor='#C8DCF0' class='live_1_table'>",
+				'<tr bgcolor="#B4CFCF" align="center">',
+				'<td class="ice_one" width="25%">审核编号</td>',
+				'<td class="ice_two" width="25%">{shid}</td>',
+				'<td class="ice_one" width="25%">审核状态</td>',
+				'<td class="ice_two" width="25%">{shstatus:this.shstatus()}</td>',
+				'</tr>',
+				'<tr bgcolor="#B4CFCF" align="center">',
+				'<td class="ice_one" width="25%">审核类型</td>',
+				'<td class="ice_two" width="25%">{shtype:this.shtype()}</td>',
+				'<td class="ice_one" width="25%">会计期间</td>',
+				'<td class="ice_two" width="25%">{period}</td>',
+				'</tr>',
+				'<tr bgcolor="#B4CFCF" align="center">',
+				'<td class="ice_one" width="25%">创建人</td>',
+				'<td class="ice_two" width="25%">{c_user}</td>',
+				'<td class="ice_one" width="25%">创建时间</td>',
+				'<td class="ice_two" width="25%">{ts_c}</td>',
+				'</tr>',
+				'<tr bgcolor="#B4CFCF" align="center">',
+				'<td class="ice_one" width="25%">审核人</td>',
+				'<td class="ice_two" width="25%">{v_user}</td>',
+				'<td class="ice_one" width="25%">审核时间</td>',
+				'<td class="ice_two" width="25%">{v_ts}</td>',
+				'</tr>',
+				'<tr>',
+				'<td class="ice_one">凭证撤销原因</td>',
+				'<td class="ice_two" colspan="3">',
+				'<textarea rows="2" class="textarea" disabled="true">{revoke_cause}</textarea>',
+				'</td>',
+				'</tr>',
+				'</table>',
+				'</tpl>',
 				'<tpl if="isdetail">',
 				'<input type="hidden" value="{ys_id}" id="ys_id">',
 				'<input type="hidden" value="{ys_type}" id="ys_type">',
@@ -39,20 +73,12 @@ Ext.define('Zixweb.view.yspz.yspzq.Detail', {
 				'</td>',
 				'</tr>',
 				'</tpl>',
-				"<tpl if='revoke_flag != 0'>",
 				'<tr>',
 				'<td class="ice_one">撤销原因</td>',
 				'<td class="ice_two" colspan="3">',
 				'<textarea rows="2" class="textarea" disabled="true">{revoke_cause}</textarea>',
 				'</td>',
 				'</tr>',
-				'</tpl>',
-				"<tpl if='revoke_flag == 0'>",
-				'<tr><td class="ice_one-0" colspan="4">',
-				'<input type="button" value="撤销" id="revoke_button"/>',
-				'</td>',
-				'</tr>',
-				'</tpl>',
 				'</table>',
 				'</tpl>',
 				'<tpl if="!isdetail">',
@@ -110,18 +136,40 @@ Ext.define('Zixweb.view.yspz.yspzq.Detail', {
 				"<tr  bgcolor='#ffffff'  align='center' >",
 				"<td  width='180px'>{key}</td>",
 				"<td  width='320px'>{value}</td>", "</tr>", '</tpl>', '</tpl>',
-				"</table>", '</tpl>')
+				"</table>", '</tpl>', {
+					shstatus : function(value) {
+						var text = ['待审核', '审核通过', '审核未通过']
+						return text[value];
+					},
+					shtype : function(value) {
+						var text = ['特种调账单', '凭证撤销'];
+						return text[parseInt(value) - 1];
+					}
+				})
 	}],
 	initComponent : function() {
 		var grid = this;
 		var store = new Ext.data.Store({
-			model : 'Zixweb.model.yspz.yspzq.Detail',
+			fields : ['title', 'ys_type', 'cause', 'memo', 'revoke_flag',
+					'revoke_cause', 'period', 'ys_id', 'properties', 'j_book',
+					'd_book', 'isdetail', 'j_amt', 'd_amt', 'isverify',
+					'c_user', 'shid', 'shstatus', 'shtype', 'ts_c', 'v_ts',
+					'v_user'],
 			proxy : {
 				type : 'ajax',
-				url : 'yspzq/detail'
+				url : 'taskpzcx/detail'
 			},
 			listeners : {
-				load : function() {
+				load : function(thiz, records, successful, eOpts) {
+					if (!successful) {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '数据加载失败,请联系管理员',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
+						return;
+					}
 					var expander = grid.getPlugin('rowexpander');
 					for (i = 0; i < grid.getStore().getCount(); i++) {
 						expander.toggleRow(i, grid.getStore().getAt(i));

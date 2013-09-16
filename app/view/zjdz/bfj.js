@@ -111,7 +111,7 @@ Ext.define('Zixweb.view.zjdz.bfj', {
 							var bfjacct = Ext.data.StoreManager
 									.lookup('Zixweb.store.component.BfjAcct');
 							var index = bfjacct.findExact('id', value);
-							return bfjacct.getAt(index).data.name;;
+							return bfjacct.getAt(index).data.name;
 						},
 						flex : 3
 					}, {

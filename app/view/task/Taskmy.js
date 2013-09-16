@@ -1,6 +1,6 @@
-Ext.define('Zixweb.view.task.SHTask', {
+Ext.define('Zixweb.view.task.Taskmy', {
 	extend : 'Ext.panel.Panel',
-	alias : 'widget.taskshtask',
+	alias : 'widget.taskmy',
 
 	defaults : {
 		bodyPadding : 5,
@@ -10,8 +10,8 @@ Ext.define('Zixweb.view.task.SHTask', {
 
 	initComponent : function() {
 		var store = new Ext.data.Store({
-					fields : ['id', 'cause', 'c_user_name', 'ts_c',
-							'sh_status', 'sh_type'],
+					fields : ['id', 'cause', 'c_user_name', 'ts_c', 'shstatus',
+							'ys_type', 'ys_id', 'shtype'],
 
 					pageSize : 50,
 					remoteSort : true,
@@ -19,7 +19,7 @@ Ext.define('Zixweb.view.task.SHTask', {
 					proxy : {
 						type : 'ajax',
 						api : {
-							read : 'task/shtask'
+							read : 'taskmy/list'
 						},
 						reader : {
 							type : 'json',
@@ -30,9 +30,9 @@ Ext.define('Zixweb.view.task.SHTask', {
 					},
 					listeners : {
 						beforeload : function(store, operation, eOpts) {
-							var form = Ext.getCmp('taskshtaskform').getForm();
+							var form = Ext.getCmp('taskmyform').getForm();
 							var values = form.getValues();
-							var grid = Ext.getCmp('task_shtask');
+							var grid = Ext.getCmp('taskmygrid');
 							if (form.isValid()) {
 								if (values.from) {
 									values.from += ' 00:00:00';
@@ -44,14 +44,24 @@ Ext.define('Zixweb.view.task.SHTask', {
 							} else {
 								return false;
 							}
+						},
+						load : function(thiz, records, successful, eOpts) {
+							if (!successful) {
+								Ext.MessageBox.show({
+											title : '警告',
+											msg : '数据加载失败,请联系管理员',
+											buttons : Ext.Msg.YES,
+											icon : Ext.Msg.ERROR
+										});
+							}
 						}
 					}
 				});
 		this.store = store;
 		this.items = [{
 					xtype : 'form',
-					title : '待审核任务查询',
-					id : 'taskshtaskform',
+					title : '我的任务查询',
+					id : 'taskmyform',
 
 					fieldDefaults : {
 						labelWidth : 90
@@ -83,24 +93,15 @@ Ext.define('Zixweb.view.task.SHTask', {
 											vtype : 'id',
 											fieldLabel : '任务编号'
 										}, {
-											xtype : 'textfield',
-											fieldLabel : '创建用户',
-											width : 288,
-											name : 'c_user'
-										}]
-
-							}, {
-								xtype : 'fieldcontainer',
-								layout : 'hbox',
-								items : [{
+											xtype : 'shtype',
+											name : 'type',
+											margin : '0 10 0 0',
+											fieldLabel : '审核类型'
+										}, {
 											xtype : 'shstatus',
 											name : 'status',
 											margin : '0 10 0 0',
 											fieldLabel : '审核状态'
-										}, {
-											xtype : 'shtype',
-											name : 'type',
-											fieldLabel : '审核类型'
 										}]
 
 							}, {
@@ -118,9 +119,9 @@ Ext.define('Zixweb.view.task.SHTask', {
 								}
 							}]
 				}, {
-					title : '待审核任务',
+					title : '我的任务列表',
 					xtype : 'gridpanel',
-					id : 'task_shtask',
+					id : 'taskmygrid',
 					height : 500,
 
 					store : store,
@@ -137,11 +138,15 @@ Ext.define('Zixweb.view.task.SHTask', {
 								sortable : false,
 								width : 80
 							}, {
-								text : "创建用户",
-								itemId : 'c_user',
-								dataIndex : 'c_user_name',
+								text : "任务类型",
+								itemId : 'shtype',
+								dataIndex : 'shtype',
 								sortable : false,
-								flex : 1
+								flex : 1,
+								renderer : function(value) {
+									var text = ['特种调账单', '凭证撤销'];
+									return text[parseInt(value) - 1];
+								}
 							}, {
 								text : "创建时间",
 								dataIndex : 'ts_c',
@@ -150,21 +155,12 @@ Ext.define('Zixweb.view.task.SHTask', {
 								flex : 1
 							}, {
 								text : "审核状态",
-								dataIndex : 'sh_status',
+								dataIndex : 'shstatus',
 								sortable : false,
 								flex : 1,
 								renderer : function(value) {
 									var text = ['待审核', '审核通过', '审核未通过']
 									return text[value];
-								}
-							}, {
-								text : "审核类型",
-								dataIndex : 'sh_type',
-								flex : 1,
-								sortable : false,
-								renderer : function(value) {
-									var text = ['特种调账单', '凭证撤销'];
-									return text[value - 1];
 								}
 							}, {
 								text : "备注",
@@ -191,36 +187,53 @@ Ext.define('Zixweb.view.task.SHTask', {
 									handler : function(grid, rowIndex, colIndex) {
 										var rec = grid.getStore()
 												.getAt(rowIndex);
+										var id, cmp;
 										var viewport = grid.up('viewport'), center = viewport
-												.down('center'), id = 'book_detail_'
-												+ rec.data.ys_type
-												+ rec.data.ys_id, cmp = Ext
-												.getCmp(id);
-										var yspzqdetail = Ext
-												.createByAlias('widget.yspzqdetail');
-										yspzqdetail.store.load({
+												.down('center');
+										if (parseInt(rec.data.shtype) == 1) {
+											id = 'task0000_detail_'
+													+ rec.data.id;
+											cmp = Ext.getCmp(id);
+										} else if (parseInt(rec.data.shtype) == 2) {
+											id = 'yspzq_detail_'
+													+ rec.data.ys_type
+													+ rec.data.ys_id, cmp = Ext
+													.getCmp(id);
+										}
+										if (cmp) {
+											center.setActiveTab(cmp);
+										} else {
+											var taskmy;
+											if (parseInt(rec.data.shtype) == 1) {
+												taskmy = Ext
+														.createByAlias('widget.task0000detail');
+												taskmy.store.load({
+															params : {
+																id : rec.data.id,
+																rdonly : 'rdonly'
+															}
+														});
+
+											} else if (parseInt(rec.data.shtype) == 2) {
+												taskmy = Ext
+														.createByAlias('widget.taskpzcxdetail');
+												taskmy.store.load({
 													params : {
+														id : rec.data.id,
 														ys_type : rec.data.ys_type,
 														ys_id : rec.data.ys_id
 													}
 												});
-										if (cmp) {
-											center.setActiveTab(cmp);
-										} else {
+											}
 											center.add({
 												closable : true,
 												xtype : 'panel',
-												items : yspzqdetail,
-												id : 'book_detail_'
-														+ rec.data.ys_type
-														+ rec.data.ys_id,
-												title : Ext.String
-														.ellipsis(
-																rec.data.ys_type
-																		+ ':'
-																		+ rec.data.ys_id
-																		+ '详细信息',
-																8, true)
+												items : taskmy,
+												id : 'taskmy_detail_'
+														+ rec.data.id,
+												title : Ext.String.ellipsis(
+														'我的任务' + rec.data.id,
+														8, true)
 											}).show();
 										}
 										viewport.doLayout();

@@ -23,7 +23,15 @@ a {
 }
 
 .reconciliation {
-	background-image: url('../images/icons/detail.png');
+	background-image: url('../images/icons/reconciliation.png');
+}
+
+.pass {
+	background-image: url('../images/icons/pass.png');
+}
+
+.deny {
+	background-image: url('../images/icons/deny.png');
 }
 
 .history {
@@ -64,7 +72,7 @@ a {
 
 .live_1_table {
 	color: #666;
-	margin-bottom: 20px;
+	margin: 5px;
 }
 
 .live_1_table tr {
