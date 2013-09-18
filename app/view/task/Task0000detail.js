@@ -12,7 +12,7 @@ Ext.define('Zixweb.view.task.Task0000detail', {
 		selectRowOnExpand : true,
 		rowBodyTpl : new Ext.XTemplate(
 				'<tpl if="isdetail">',
-				"<table width='95%' border='0' cellspacing='1' cellpadding='0' align='center' bgcolor='#C8DCF0' class='live_1_table'>",
+				"<table id='task0000_{shid}' width='95%' border='0' cellspacing='1' cellpadding='0' align='center' bgcolor='#C8DCF0' class='live_1_table'>",
 				'<tr bgcolor="#B4CFCF" align="center">',
 				'<td class="ice_one" width="25%">审核编号</td>',
 				'<td class="ice_two" width="25%">{shid}</td>',
@@ -43,6 +43,14 @@ Ext.define('Zixweb.view.task.Task0000detail', {
 				'<textarea rows="2" class="textarea" disabled="true">{cause}</textarea>',
 				'</td>',
 				'</tr>',
+				'<tpl if="this.isRdonly(rdonly)">',
+				'<tpl if="shstatus == 0">',
+				'<tr bgcolor="#B4CFCF" align="center">',
+				'<td class="ice_one-0" width="100%" colspan="4">',
+				'<input type="button" id="task0000detail_pass_{shid}" value="通过" />',
+				'<input type="button" id="task0000detail_deny_{shid}" value="拒绝" />',
+				'</td></tr>',
+				'</tpl></tpl>',
 				'</table>',
 				'</tpl>',
 				'<tpl if="!isdetail">',
@@ -101,6 +109,9 @@ Ext.define('Zixweb.view.task.Task0000detail', {
 				"<td width='180px'>{key}</td>",
 				"<td width='320px'>{value}</td>", "</tr>", '</tpl>', '</tpl>',
 				"</table>", '</tpl>', {
+					isRdonly : function(rdonly) {
+						return rdonly !== 'rdonly';
+					},
 					shstatus : function(value) {
 						var text = ['待审核', '审核通过', '审核未通过']
 						return text[value];
@@ -114,32 +125,121 @@ Ext.define('Zixweb.view.task.Task0000detail', {
 	initComponent : function() {
 		var grid = this;
 		var store = new Ext.data.Store({
-					fields : ['title', 'rdonly', 'cause', 'c_user', 'shid',
-							'shstatus', 'period', 'shtype', 'properties',
-							'j_book', 'd_book', 'isdetail', 'j_amt', 'd_amt',
-							'ts_c', 'v_ts', 'v_user'],
-					proxy : {
-						type : 'ajax',
-						url : 'task0000/detail'
-					},
-					listeners : {
-						load : function(thiz, records, successful, eOpts) {
-							if (!successful) {
-								Ext.MessageBox.show({
-											title : '警告',
-											msg : '数据加载失败,请联系管理员',
-											buttons : Ext.Msg.YES,
-											icon : Ext.Msg.ERROR
-										});
-								return;
-							}
-							var expander = grid.getPlugin('rowexpander');
-							for (i = 0; i < grid.getStore().getCount(); i++) {
-								expander.toggleRow(i, grid.getStore().getAt(i));
-							}
-						}
+			fields : ['title', 'rdonly', 'cause', 'c_user', 'shid', 'shstatus',
+					'period', 'shtype', 'properties', 'j_book', 'd_book',
+					'isdetail', 'j_amt', 'd_amt', 'ts_c', 'v_ts', 'v_user'],
+			proxy : {
+				type : 'ajax',
+				url : 'task0000/detail'
+			},
+			listeners : {
+				load : function(thiz, records, successful, eOpts) {
+					if (!successful) {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '数据加载失败,请联系管理员',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
+						return;
 					}
-				});
+					var expander = grid.getPlugin('rowexpander');
+					for (i = 0; i < grid.getStore().getCount(); i++) {
+						expander.toggleRow(i, grid.getStore().getAt(i));
+					}
+					// button注册事件
+					var id = 'task0000_' + records[0].data.shid;
+					var tbl = Ext.get(id);
+					var buttons = tbl.select("input[type=button]");
+					for (var i in buttons.elements) {
+						var button = Ext.get(buttons.elements[i]
+								.getAttribute('id'));
+						button.on('click', function(e, thiz, eOpts) {
+							var arr = thiz.getAttribute('id').split('_');
+							var id = arr.pop();
+							var type = arr.pop();
+							if (type === 'pass') {
+								Ext.MessageBox.confirm('提示', '执行审核通过?',
+										function(opt) {
+											if (opt === 'yes') {
+												Ext.Ajax.request({
+													async : false,
+													url : 'task0000/pass',
+													params : {
+														id : id
+													},
+													success : function(response) {
+														var success = Ext
+																.decode(response.responseText).success;
+														if (success) {
+															Ext.MessageBox
+																	.alert(
+																			'提示',
+																			'操作成功');
+															store.reload();
+														} else {
+															Ext.MessageBox
+																	.alert(
+																			'警告',
+																			'操作失败');
+														}
+													},
+													failure : function(
+															response, opts) {
+														Ext.MessageBox.show({
+															title : '警告',
+															msg : '服务器出错，请联系管理人员',
+															buttons : Ext.Msg.YES,
+															icon : Ext.Msg.ERROR
+														});
+													}
+												});
+											}
+										});
+							} else if (type === 'deny') {
+								Ext.MessageBox.confirm('提示', '执行审核拒绝?',
+										function(opt) {
+											if (opt === 'yes') {
+												Ext.Ajax.request({
+													async : false,
+													url : 'task0000/deny',
+													params : {
+														id : id
+													},
+													success : function(response) {
+														var success = Ext
+																.decode(response.responseText).success;
+														if (success) {
+															Ext.MessageBox
+																	.alert(
+																			'提示',
+																			'操作成功');
+														} else {
+															Ext.MessageBox
+																	.alert(
+																			'警告',
+																			'操作失败');
+														}
+														store.reload();
+													},
+													failure : function(
+															response, opts) {
+														Ext.MessageBox.show({
+															title : '警告',
+															msg : '服务器出错，请联系管理人员',
+															buttons : Ext.Msg.YES,
+															icon : Ext.Msg.ERROR
+														});
+													}
+												});
+											}
+										});
+							}
+						});
+					}
+				}
+			}
+		});
 		this.store = store;
 		this.columns = [{
 					text : "标题",

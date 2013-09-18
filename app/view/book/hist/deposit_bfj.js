@@ -37,6 +37,18 @@ Ext.define('Zixweb.view.book.hist.deposit_bfj', {
 					} else {
 						return false;
 					}
+				},
+				listeners : {
+					load : function(thiz, records, successful, eOpts) {
+						if (!successful) {
+							Ext.MessageBox.show({
+										title : '警告',
+										msg : '数据加载失败,请联系管理员',
+										buttons : Ext.Msg.YES,
+										icon : Ext.Msg.ERROR
+									});
+						}
+					}
 				}
 			}
 		});
@@ -99,7 +111,8 @@ Ext.define('Zixweb.view.book.hist.deposit_bfj', {
 											margin : '0 10 0 0',
 											fieldLabel : '备付金账号'
 										}, {
-											xtype : 'bfjacct',
+											xtype : 'ystype',
+											name : 'ys_type',
 											fieldLabel : '原始凭证类型'
 										}]
 
@@ -249,13 +262,9 @@ Ext.define('Zixweb.view.book.hist.deposit_bfj', {
 												id : 'yspzq_detail_'
 														+ rec.data.ys_type
 														+ rec.data.ys_id,
-												title : Ext.String
-														.ellipsis(
-																rec.data.ys_type
-																		+ ':'
-																		+ rec.data.ys_id
-																		+ '详细信息',
-																8, true)
+												title : '凭证' + rec.data.ys_type
+														+ '详细信息-'
+														+ rec.data.ys_id
 											}).show();
 										}
 										viewport.doLayout();

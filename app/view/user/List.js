@@ -27,14 +27,26 @@ Ext.define('Zixweb.view.user.List', {
 			sorters : [{
 						property : 'user_id',
 						direction : 'DESC'
-					}]
+					}],
+			listeners : {
+				load : function(thiz, records, successful, eOpts) {
+					if (!successful) {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '数据加载失败,请联系管理员',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
+					}
+				}
+			}
 		});
 		this.store = store;
 		this.dockedItems = [{
 					xtype : 'toolbar',
 					dock : 'top',
 					items : [{
-								iconCls : 'add',
+								iconCls : 'useradd',
 								text : '添加用户',
 								tooltip : '添加用户',
 								action : 'add',
@@ -83,8 +95,8 @@ Ext.define('Zixweb.view.user.List', {
 					width : 50,
 					align : 'center',
 					items : [{
-								iconCls : 'edit',
-								tooltip : '编辑',
+								iconCls : 'useredit',
+								tooltip : '编辑用户',
 								handler : function(grid, rowIndex, colIndex) {
 									var record = grid.getStore()
 											.getAt(rowIndex);

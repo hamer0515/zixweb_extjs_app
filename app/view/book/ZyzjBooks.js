@@ -14,6 +14,18 @@ Ext.define('Zixweb.view.book.ZyzjBooks', {
 						proxy : {
 							type : 'ajax',
 							url : 'book/zyzj'
+						},
+						listeners : {
+							load : function(thiz, records, successful, eOpts) {
+								if (!successful) {
+									Ext.MessageBox.show({
+												title : '警告',
+												msg : '数据加载失败,请联系管理员',
+												buttons : Ext.Msg.YES,
+												icon : Ext.Msg.ERROR
+											});
+								}
+							}
 						}
 					}),
 			columns : [{

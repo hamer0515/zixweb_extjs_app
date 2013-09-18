@@ -555,7 +555,7 @@ Ext.define('Zixweb.view.pzlr.i0000', {
 														.setValues(sendData);
 												form.getForm().submit({
 													clientValidation : true,
-													url : '/yspz/itztz',
+													url : '/pzlr/i0000',
 													params : {
 														data : Ext.JSON
 																.encode(sendData)
@@ -628,7 +628,13 @@ Ext.define('Zixweb.view.pzlr.i0000', {
 										+ form.names[f] + ']值为空');
 						return false;
 					}
-					data[fl]["j_book"][f] = jbook[f];
+					if (f === 'amt') {
+						data[fl]["j_book"][f] = parseInt(parseFloat(jbook[f])
+								* 100);
+					} else {
+						data[fl]["j_book"][f] = jbook[f];
+					}
+					// data[fl]["j_book"][f] = jbook[f];
 				}
 				data[fl]["d_book"] = {};
 				data[fl]["d_book"]["_type"] = field[1]["_type"];
@@ -638,7 +644,12 @@ Ext.define('Zixweb.view.pzlr.i0000', {
 										+ form.names[f] + ']值为空');
 						return false;
 					}
-					data[fl]["d_book"][f] = dbook[f];
+					if (f === 'amt') {
+						data[fl]["d_book"][f] = parseInt(parseFloat(dbook[f])
+								* 100);
+					} else {
+						data[fl]["d_book"][f] = dbook[f];
+					}
 				}
 			}
 			if (empty) {

@@ -36,10 +36,9 @@ Ext.define('Zixweb.view.role.List', {
 					xtype : 'toolbar',
 					dock : 'top',
 					items : [{
-								iconCls : 'add',
+								iconCls : 'roleadd',
 								text : '添加角色',
 								tooltip : '添加角色',
-								action : 'add',
 								handler : function() {
 									Ext.widget('roleadd', {
 												modal : true,
@@ -78,7 +77,7 @@ Ext.define('Zixweb.view.role.List', {
 					width : 80,
 					align : 'center',
 					items : [{
-								iconCls : 'edit',
+								iconCls : 'roleedit',
 								tooltip : '编辑',
 								action : 'edit',
 								handler : function(grid, rowIndex, colIndex) {
@@ -92,7 +91,7 @@ Ext.define('Zixweb.view.role.List', {
 									view.down('form').loadRecord(record);
 								}
 							}, {
-								iconCls : 'delete',
+								iconCls : 'roledelete',
 								tooltip : '删除',
 								handler : function(grid, rowIndex, colIndex) {
 									var record = grid.getStore()

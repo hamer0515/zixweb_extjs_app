@@ -22,7 +22,7 @@ Ext.define('Zixweb.view.Center', {
 			autoShow : true,
 			listeners : {
 				tabchange : function(tabPanel, newCard, oldCard, eOpts) {
-					if (newCard.id == "center_zjdzbfj" || newCard.id == "center_task0000") {
+					if (/^(center_task|center_zjdzbfjgzcx|center_zjdzbfj)/.test(newCard.id)) {
 						newCard.items.items[0].store.reload();
 					}
 				}

@@ -184,7 +184,7 @@ Ext.define('Zixweb.view.task.Task0000', {
 										var rec = grid.getStore()
 												.getAt(rowIndex);
 										var viewport = grid.up('viewport'), center = viewport
-												.down('center'), id = 'task0000_detail_'
+												.down('center'), id = 'center_task0000_detail_'
 												+ rec.data.id, cmp = Ext
 												.getCmp(id);
 										if (cmp) {
@@ -201,14 +201,10 @@ Ext.define('Zixweb.view.task.Task0000', {
 												closable : true,
 												xtype : 'panel',
 												items : task0000detail,
-												id : 'task0000_detail_'
+												id : 'center_task0000_detail_'
 														+ rec.data.id,
-												title : Ext.String
-														.ellipsis(
-																'0000撤销:'
-																		+ rec.data.ys_id
-																		+ '详细信息',
-																8, true)
+												title : '0000录入' + '详细信息-'
+														+ rec.data.id
 											}).show();
 										}
 										viewport.doLayout();

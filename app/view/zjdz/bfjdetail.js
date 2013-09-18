@@ -154,32 +154,40 @@ Ext.define('Zixweb.view.zjdz.bfjdetail', {
 					for (var i in fields.elements) {
 						var field = Ext.get(fields.elements[i]
 								.getAttribute('id'));
-						// field.on('focus', function(e, t, eOpts) {
-						// var id = t.getAttribute('id');
-						// var t = id.split('_');
-						// var type = t.shift();
-						// if (type === 'j') {
-						// Ext.MessageBox.confirm('提示',
-						// '是否要清空[贷方]金额?', function(opt) {
-						// if (opt === 'yes') {
-						// t.unshift('d');
-						// var id = t.join('_');
-						// var field = Ext.get(id);
-						// field.setValue(0.00);
-						// }
-						// });
-						// } else if (type === 'd') {
-						// Ext.MessageBox.confirm('提示',
-						// '是否要清空[借方]金额?', function(opt) {
-						// if (opt === 'yes') {
-						// t.unshift('j');
-						// var id = t.join('_');
-						// var field = Ext.get(id);
-						// field.setValue(0.00);
-						// }
-						// });
-						// }
-						// });
+						field.on('click', function(e, t, eOpts) {
+									var id = t.getAttribute('id');
+									var t = id.split('_');
+									var type = t.shift();
+									if (type === 'j') {
+										t.unshift('d');
+										var d_id = t.join('_');
+										var field = Ext.getDom(d_id);
+										if (field.value !== '0.00') {
+											Ext.MessageBox.confirm('提示',
+													'清空贷方金额', function(opt) {
+														if (opt === 'yes') {
+															field.value = '0.00';
+														}
+														var comp = Ext
+																.getDom(id);
+														Ext.getDom(id).focus();
+													});
+										}
+									} else if (type === 'd') {
+										t.unshift('j');
+										var j_id = t.join('_');
+										var field = Ext.getDom(j_id);
+										if (field.value !== '0.00') {
+											Ext.MessageBox.confirm('提示',
+													'清空借方金额', function(opt) {
+														if (opt === 'yes') {
+															field.value = '0.00';
+														}
+														Ext.getDom(id).focus();
+													});
+										}
+									}
+								});
 						field.on('blur', function(e, t, eOpts) {
 									var value = t.value.replace(',', '', 'g');
 									value = value.trim();

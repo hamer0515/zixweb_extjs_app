@@ -6,20 +6,65 @@ a {
 	display: none;
 }
 
-.add {
-	background-image: url('../images/icons/add.png');
+.useradd {
+	background-image: url('../images/icons/user_add.png');
 }
 
-.delete {
-	background-image: url('../images/icons/delete.gif');
+.useredit {
+	background-image: url('../images/icons/user_edit.png');
 }
 
-.edit {
-	background-image: url('../images/icons/edit.png');
+.roleadd {
+	background-image: url('../images/icons/role_add.png');
+}
+
+.roleedit {
+	background-image: url('../images/icons/role_edit.png');
+	margin-right: 5px;
+}
+
+.roledelete {
+	background-image: url('../images/icons/role_delete.png');
+}
+
+.downloadfile {
+	background-image: url('../images/icons/download_file.png');
+	margin-right: 5px;
+}
+
+.downloadfileagain {
+	background-image: url('../images/icons/download_file_again.png');
+	margin-right: 5px;
+}
+
+.assignjob {
+	background-image: url('../images/icons/assign_job.png');
+	margin-right: 5px;
+}
+
+.assignjobagain {
+	background-image: url('../images/icons/assign_job_again.png');
+	margin-right: 5px;
+}
+
+.startjob {
+	background-image: url('../images/icons/start_job.png');
+	margin-right: 5px;
+}
+
+.showlog {
+	background-image: url('../images/icons/show_log.png');
+	margin-right: 5px;
+}
+
+.refresh {
+	background-image: url('../images/icons/refresh.png');
+	margin-right: 5px;
 }
 
 .detail {
 	background-image: url('../images/icons/detail.png');
+	margin-right: 5px;
 }
 
 .reconciliation {
@@ -28,6 +73,7 @@ a {
 
 .pass {
 	background-image: url('../images/icons/pass.png');
+	margin-right: 5px;
 }
 
 .deny {

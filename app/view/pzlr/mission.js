@@ -174,7 +174,7 @@ Ext.define('Zixweb.view.pzlr.mission', {
 									getClass : function(v, meta, rec) {
 										var mstatus = parseInt(rec.data.mstatus);
 										if (mstatus == 1) {
-											return 'reconciliation';
+											return 'downloadfile';
 										}
 										return 'hide';
 									},
@@ -230,7 +230,7 @@ Ext.define('Zixweb.view.pzlr.mission', {
 									getClass : function(v, meta, rec) {
 										var mstatus = parseInt(rec.data.mstatus);
 										if (mstatus == 3) {
-											return 'reconciliation';
+											return 'assignjob';
 										}
 										return 'hide';
 									},
@@ -286,7 +286,7 @@ Ext.define('Zixweb.view.pzlr.mission', {
 									getClass : function(v, meta, rec) {
 										var mstatus = parseInt(rec.data.mstatus);
 										if (mstatus == 5) {
-											return 'reconciliation';
+											return 'startjob';
 										}
 										return 'hide';
 									},
@@ -342,7 +342,7 @@ Ext.define('Zixweb.view.pzlr.mission', {
 									getClass : function(v, meta, rec) {
 										var mstatus = parseInt(rec.data.mstatus);
 										if (mstatus == -1) {
-											return 'reconciliation';
+											return 'downloadfileagain';
 										}
 										return 'hide';
 									},
@@ -398,7 +398,7 @@ Ext.define('Zixweb.view.pzlr.mission', {
 									getClass : function(v, meta, rec) {
 										var mstatus = parseInt(rec.data.mstatus);
 										if (mstatus == -2) {
-											return 'reconciliation';
+											return 'assignjobagain';
 										}
 										return 'hide';
 									},
@@ -456,7 +456,7 @@ Ext.define('Zixweb.view.pzlr.mission', {
 										if (mstatus == 5 || mstatus == 6
 												|| mstatus == 7
 												|| mstatus == -3) {
-											return 'reconciliation';
+											return 'detail';
 										}
 										return 'hide';
 									},

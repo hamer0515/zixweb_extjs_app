@@ -191,14 +191,14 @@ Ext.define('Zixweb.view.task.Taskmy', {
 										var viewport = grid.up('viewport'), center = viewport
 												.down('center');
 										if (parseInt(rec.data.shtype) == 1) {
-											id = 'task0000_detail_'
+											id = 'center_task0000_detail_'
 													+ rec.data.id;
 											cmp = Ext.getCmp(id);
 										} else if (parseInt(rec.data.shtype) == 2) {
-											id = 'yspzq_detail_'
+											id = 'center_taskpzcx_detail_'
 													+ rec.data.ys_type
-													+ rec.data.ys_id, cmp = Ext
-													.getCmp(id);
+													+ rec.data.ys_id;
+											cmp = Ext.getCmp(id);
 										}
 										if (cmp) {
 											center.setActiveTab(cmp);
@@ -221,20 +221,19 @@ Ext.define('Zixweb.view.task.Taskmy', {
 													params : {
 														id : rec.data.id,
 														ys_type : rec.data.ys_type,
-														ys_id : rec.data.ys_id
+														ys_id : rec.data.ys_id,
+														rdonly : 'rdonly'
 													}
 												});
 											}
 											center.add({
-												closable : true,
-												xtype : 'panel',
-												items : taskmy,
-												id : 'taskmy_detail_'
-														+ rec.data.id,
-												title : Ext.String.ellipsis(
-														'我的任务' + rec.data.id,
-														8, true)
-											}).show();
+														closable : true,
+														xtype : 'panel',
+														items : taskmy,
+														id : id,
+														title : '我的任务-'
+																+ rec.data.id
+													}).show();
 										}
 										viewport.doLayout();
 									}

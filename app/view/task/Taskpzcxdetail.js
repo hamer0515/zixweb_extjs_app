@@ -12,7 +12,7 @@ Ext.define('Zixweb.view.task.Taskpzcxdetail', {
 		selectRowOnExpand : true,
 		rowBodyTpl : new Ext.XTemplate(
 				'<tpl if="isverify">',
-				"<table width='95%' border='0' cellspacing='1' cellpadding='0' align='center' bgcolor='#C8DCF0' class='live_1_table'>",
+				"<table id='taskpzcx_{shid}' width='95%' border='0' cellspacing='1' cellpadding='0' align='center' bgcolor='#C8DCF0' class='live_1_table'>",
 				'<tr bgcolor="#B4CFCF" align="center">',
 				'<td class="ice_one" width="25%">审核编号</td>',
 				'<td class="ice_two" width="25%">{shid}</td>',
@@ -43,6 +43,14 @@ Ext.define('Zixweb.view.task.Taskpzcxdetail', {
 				'<textarea rows="2" class="textarea" disabled="true">{revoke_cause}</textarea>',
 				'</td>',
 				'</tr>',
+				'<tpl if="this.isRdonly(rdonly)">',
+				'<tpl if="shstatus == 0">',
+				'<tr bgcolor="#B4CFCF" align="center">',
+				'<td class="ice_one-0" width="100%" colspan="4">',
+				'<input type="button" id="taskpzcxdetail_pass_{shid}" value="通过" />',
+				'<input type="button" id="taskpzcxdetail_deny_{shid}" value="拒绝" />',
+				'</td></tr>',
+				'</tpl></tpl>',
 				'</table>',
 				'</tpl>',
 				'<tpl if="isdetail">',
@@ -137,6 +145,9 @@ Ext.define('Zixweb.view.task.Taskpzcxdetail', {
 				"<td  width='180px'>{key}</td>",
 				"<td  width='320px'>{value}</td>", "</tr>", '</tpl>', '</tpl>',
 				"</table>", '</tpl>', {
+					isRdonly : function(rdonly) {
+						return rdonly !== 'rdonly';
+					},
 					shstatus : function(value) {
 						var text = ['待审核', '审核通过', '审核未通过']
 						return text[value];
@@ -154,7 +165,7 @@ Ext.define('Zixweb.view.task.Taskpzcxdetail', {
 					'revoke_cause', 'period', 'ys_id', 'properties', 'j_book',
 					'd_book', 'isdetail', 'j_amt', 'd_amt', 'isverify',
 					'c_user', 'shid', 'shstatus', 'shtype', 'ts_c', 'v_ts',
-					'v_user'],
+					'v_user', 'rdonly'],
 			proxy : {
 				type : 'ajax',
 				url : 'taskpzcx/detail'
@@ -174,20 +185,95 @@ Ext.define('Zixweb.view.task.Taskpzcxdetail', {
 					for (i = 0; i < grid.getStore().getCount(); i++) {
 						expander.toggleRow(i, grid.getStore().getAt(i));
 					}
-					var button = Ext.get('revoke_button');
-					if (button) {
-						button.on('click', function(e, btn, eOpts) {
-									var ys_type = Ext.get('ys_type').getValue();
-									var ys_id = Ext.get('ys_id').getValue();
-									var period = Ext.get('period').getValue();
-									Ext.widget('yspzrevoke_cause', {
-												modal : true,
-												resizable : false,
-												ys_type : ys_type,
-												ys_id : ys_id,
-												period : period
-											})
-								}, self);
+					// button注册事件
+					var id = 'taskpzcx_' + records[0].data.shid;
+					var tbl = Ext.get(id);
+					var buttons = tbl.select("input[type=button]");
+					for (var i in buttons.elements) {
+						var button = Ext.get(buttons.elements[i]
+								.getAttribute('id'));
+						button.on('click', function(e, thiz, eOpts) {
+							var arr = thiz.getAttribute('id').split('_');
+							var id = arr.pop();
+							var type = arr.pop();
+							if (type === 'pass') {
+								Ext.MessageBox.confirm('提示', '执行审核通过?',
+										function(opt) {
+											if (opt === 'yes') {
+												Ext.Ajax.request({
+													async : false,
+													url : 'taskpzcx/pass',
+													params : {
+														id : id
+													},
+													success : function(response) {
+														var success = Ext
+																.decode(response.responseText).success;
+														if (success) {
+															Ext.MessageBox
+																	.alert(
+																			'提示',
+																			'操作成功');
+															store.reload();
+														} else {
+															Ext.MessageBox
+																	.alert(
+																			'警告',
+																			'操作失败');
+														}
+													},
+													failure : function(
+															response, opts) {
+														Ext.MessageBox.show({
+															title : '警告',
+															msg : '服务器出错，请联系管理人员',
+															buttons : Ext.Msg.YES,
+															icon : Ext.Msg.ERROR
+														});
+													}
+												});
+											}
+										});
+							} else if (type === 'deny') {
+								Ext.MessageBox.confirm('提示', '执行审核拒绝?',
+										function(opt) {
+											if (opt === 'yes') {
+												Ext.Ajax.request({
+													async : false,
+													url : 'taskpzcx/deny',
+													params : {
+														id : id
+													},
+													success : function(response) {
+														var success = Ext
+																.decode(response.responseText).success;
+														if (success) {
+															Ext.MessageBox
+																	.alert(
+																			'提示',
+																			'操作成功');
+														} else {
+															Ext.MessageBox
+																	.alert(
+																			'警告',
+																			'操作失败');
+														}
+														store.reload();
+													},
+													failure : function(
+															response, opts) {
+														Ext.MessageBox.show({
+															title : '警告',
+															msg : '服务器出错，请联系管理人员',
+															buttons : Ext.Msg.YES,
+															icon : Ext.Msg.ERROR
+														});
+													}
+												});
+											}
+										});
+							}
+						});
 					}
 				}
 			}

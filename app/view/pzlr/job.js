@@ -41,7 +41,7 @@ Ext.define('Zixweb.view.pzlr.job', {
 					xtype : 'toolbar',
 					dock : 'top',
 					items : [{
-								iconCls : 'add',
+								iconCls : 'refresh',
 								text : '刷新',
 								tooltip : '刷新',
 								handler : function() {
@@ -137,7 +137,7 @@ Ext.define('Zixweb.view.pzlr.job', {
 							getClass : function(v, meta, rec) {
 								var jstatus = parseInt(rec.data.jstatus);
 								if (jstatus != 1) {
-									return 'reconciliation';
+									return 'showlog';
 								}
 								return 'hide';
 							},
@@ -168,7 +168,7 @@ Ext.define('Zixweb.view.pzlr.job', {
 							getClass : function(v, meta, rec) {
 								var jstatus = parseInt(rec.data.jstatus);
 								if (jstatus == 1 || jstatus == -1) {
-									return 'reconciliation';
+									return 'startjob';
 								}
 								return 'hide';
 							},

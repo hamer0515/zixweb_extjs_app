@@ -208,13 +208,10 @@ Ext.define('Zixweb.view.task.Taskpzcx', {
 												id : 'yspzq_detail_'
 														+ rec.data.ys_type
 														+ rec.data.ys_id,
-												title : Ext.String
-														.ellipsis(
-																rec.data.ys_type
-																		+ ':'
+												title : 
+																'凭证'+rec.data.ys_type
+																		+ '详细信息-'
 																		+ rec.data.ys_id
-																		+ '详细信息',
-																8, true)
 											}).show();
 										}
 										viewport.doLayout();
