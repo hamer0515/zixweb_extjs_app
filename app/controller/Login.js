@@ -56,17 +56,34 @@ Ext.define('Zixweb.controller.Login', {
 												buttons : Ext.Msg.YES,
 												icon : Ext.Msg.INFO
 											});
-									var users = Ext.data.StoreManager
-											.lookup('Users');
-									users.reload();
+									form.reset();
 								},
 								failure : function(form, action) {
-									Ext.MessageBox.show({
-												title : '警告',
-												msg : '密码修改失败',
-												buttons : Ext.Msg.YES,
-												icon : Ext.Msg.ERROR
-											});
+									switch (action.failureType) {
+										case Ext.form.action.Action.CLIENT_INVALID :
+											Ext.MessageBox.show({
+														title : '失败',
+														msg : '表单数据有误，请检查',
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+											break;
+										case Ext.form.action.Action.CONNECT_FAILURE :
+											Ext.MessageBox.show({
+														title : '失败',
+														msg : '网络链接出错',
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+											break;
+										case Ext.form.action.Action.SERVER_INVALID :
+											Ext.MessageBox.show({
+														title : '失败',
+														msg : action.result.msg,
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+									}
 								},
 								waitMsg : '正在提交请求...',
 								waitTitle : '请稍等'

@@ -49,7 +49,16 @@ Ext.define('Zixweb.view.task.Taskmy', {
 							if (!successful) {
 								Ext.MessageBox.show({
 											title : '警告',
-											msg : '数据加载失败,请联系管理员',
+											msg : '我的任务数据加载失败,请联系管理员',
+											buttons : Ext.Msg.YES,
+											icon : Ext.Msg.ERROR
+										});
+							}
+							var jsonData = thiz.proxy.reader.jsonData.success;
+							if (jsonData && jsonData === 'forbidden') {
+								Ext.MessageBox.show({
+											title : '警告',
+											msg : '抱歉，没有我的任务数据访问权限',
 											buttons : Ext.Msg.YES,
 											icon : Ext.Msg.ERROR
 										});

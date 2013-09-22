@@ -118,283 +118,40 @@ Ext.define('Zixweb.view.pzlr.i0000', {
 		amt : '金额'
 	},
 	hearders : {
-		'1' : {
-			source : {
-				zyzj_acct : '',
-				zjbd_type : '',
-				zjbd_date : '',
-				amt : ''
-			},
-			book_name : "应付银行-已核应付银行款"
-		},
-		'2' : {
-			source : {
-				zyzj_acct : '',
-				zjbd_type : '',
-				zjbd_date : '',
-				amt : ''
-			},
-			book_name : "应收银行-已核应收银行款"
-		},
-		'3' : {
-			source : {
-				bfj_acct : '',
-				zjbd_type : '',
-				zjbd_date : '',
-				amt : ''
-			},
-			"book_name" : "应付银行-已核应付银行手续费"
-		},
-		'4' : {
-			source : {
-				bfj_acct : '',
-				zjbd_type : '',
-				zjbd_date : '',
-				amt : ''
-			},
-			"book_name" : "应收银行-已核应收银行手续费"
-		},
-		'5' : {
-			source : {
-				c : '',
-				amt : ''
-			},
-			"book_name" : "客户备付金-备付金"
-		},
-		'6' : {
-			source : {
-				bfj_acct : '',
-				zjbd_type : '',
-				e_date : '',
-				amt : ''
-			},
-			"book_name" : "应付账款-银行-备份金银行长款"
-		},
-		'7' : {
-			source : {
-				zyzj_acct : '',
-				e_date : '',
-				amt : ''
-			},
-			"book_name" : "应付账款-银行-自有资金银行长款"
-		},
-		'8' : {
-			source : {
-				bi : '',
-				tx_date : '',
-				amt : ''
-			},
-			"book_name" : "应付账款-银行-财务外付银行手续费"
-		},
-		'9' : {
-			source : {
-				bfj_acct : '',
-				zjbd_type : '',
-				e_date : '',
-				amt : ''
-			},
-			"book_name" : "应收账款-银行-备付金银行短款"
-		},
-		'10' : {
-			source : {
-				zyzj_acct : '',
-				e_date : '',
-				amt : ''
-			},
-			"book_name" : "应收账款-银行-自有资金银行短款"
-		},
-		'11' : {
-			source : {
-				c : '',
-				cust_proto : '',
-				tx_date : '',
-				amt : ''
-			},
-			"book_name" : "应收账款-客户-定期划付客户手续费"
-		},
-		'12' : {
-			source : {
-				c : '',
-				bi : '',
-				p : '',
-				amt : ''
-			},
-			"book_name" : "成本-银行手续费支出"
-		},
-		'13' : {
-			source : {
-				p : '',
-				amt : ''
-			},
-			"book_name" : "成本-垫付损失"
-		},
-		'14' : {
-			source : {
-				bfj_acct : '',
-				amt : ''
-			},
-			"book_name" : "银行存款-备付金存款"
-		},
-		'15' : {
-			source : {
-				zyzj_acct : '',
-				amt : ''
-			},
-			"book_name" : "银行存款-自有资金存款"
-		},
-		'16' : {
-			source : {
-				acct : '',
-				amt : ''
-			},
-			"book_name" : "财务费用-金融机构手续费"
-		},
-		'17' : {
-			source : {
-				c : '',
-				p : '',
-				amt : ''
-			},
-			"book_name" : "收入-客户手续费收入"
-		},
-		'18' : {
-			source : {
-				acct : '',
-				amt : ''
-			},
-			"book_name" : "财务费用-账户利息收入"
-		},
-		'19' : {
-			source : {
-				bi : '',
-				tx_date : '',
-				amt : ''
-			},
-			"book_name" : "应收银行-待勾兑应收交易款"
-		},
-		'20' : {
-			source : {
-				bi : '',
-				tx_date : '',
-				amt : ''
-			},
-			"book_name" : "其他应付款-待确认交易款"
-		},
-		'21' : {
-			source : {
-				bfj_acct : '',
-				zjbd_type : '',
-				zjbd_date : '',
-				amt : ''
-			},
-			"book_name" : "应付银行-已核应付交易款"
-		},
-		'22' : {
-			source : {
-				bfj_acct : '',
-				zjbd_type : '',
-				zjbd_date : '',
-				amt : ''
-			},
-			"book_name" : "应收银行-已核应收交易款"
-		},
-		'23' : {
-			source : {
-				amt : ''
-			},
-			"book_name" : "往来-应付备付"
-		},
-		'24' : {
-			source : {
-				amt : ''
-			},
-			"book_name" : "往来-应付自有"
-		},
-		'25' : {
-			source : {
-				amt : ''
-			},
-			"book_name" : "往来-应收备付"
-		},
-		'26' : {
-			source : {
-				amt : ''
-			},
-			"book_name" : "往来-应收自有"
-		},
-		'27' : {
-			source : {
-				c : '',
-				cust_proto : '',
-				tx_date : '',
-				amt : ''
-			},
-			"book_name" : "应收账款-客户-分润方承担品牌费"
-		},
-		'28' : {
-			source : {
-				bi : '',
-				tx_date : '',
-				amt : ''
-			},
-			"book_name" : "其他应收款-待确认交易款"
-		},
-		'29' : {
-			source : {
-				bi : '',
-				tx_date : '',
-				amt : ''
-			},
-			"book_name" : "应付银行-待确认应付交易款"
-		},
-		'30' : {
-			source : {
-				c : '',
-				p : '',
-				bi : '',
-				fp : '',
-				tx_date : '',
-				amt : ''
-			},
-			"book_name" : "应付账款-银行-暂估周期确认银行手续费"
-		},
-		'31' : {
-			source : {
-				bi : '',
-				fp : '',
-				tx_date : '',
-				amt : ''
-			},
-			"book_name" : "应付账款-银行-周期确认银行手续费"
-		},
-		'32' : {
-			source : {
-				c : '',
-				p : '',
-				bi : '',
-				fp : '',
-				tx_date : '',
-				amt : ''
-			},
-			"book_name" : "成本-暂估银行手续费"
-		},
-		'33' : {
-			source : {
-				c : '',
-				p : '',
-				amt : ''
-			},
-			"book_name" : "内部收入"
-		},
-
-		'34' : {
-			source : {
-				c : '',
-				p : '',
-				amt : ''
-			},
-			"book_name" : "内部成本"
-		}
+		'1' : "{source : {zyzj_acct : '',zjbd_type : '',zjbd_date : '',amt : ''},book_name : '应付银行-已核应付银行款'}",
+		'2' : "{source : {zyzj_acct : '',zjbd_type : '',zjbd_date : '',amt : ''},book_name : '应收银行-已核应收银行款'}",
+		'3' : "{source : {bfj_acct : '',zjbd_type : '',zjbd_date : '',amt : ''},book_name : '应付银行-已核应付银行手续费'}",
+		'4' : "{source : {bfj_acct : '',zjbd_type : '',zjbd_date : '',amt : ''},book_name : '应收银行-已核应收银行手续费'}",
+		'5' : "{source : {c : '',amt : ''},book_name : '客户备付金-备付金'}",
+		'6' : "{source : {bfj_acct : '',zjbd_type : '',e_date : '',amt : ''},book_name : '应付账款-银行-备份金银行长款'}",
+		'7' : "{source : {zyzj_acct : '',e_date : '',amt : ''},book_name : '应付账款-银行-自有资金银行长款'}",
+		'8' : "{source : {bi : '',tx_date : '',amt : ''},book_name : '应付账款-银行-财务外付银行手续费'}",
+		'9' : "{source : {bfj_acct : '',zjbd_type : '',e_date : '',amt : ''},'book_name' : '应收账款-银行-备付金银行短款'}",
+		'10' : "{source : {zyzj_acct : '',e_date : '',amt : ''},book_name : '应收账款-银行-自有资金银行短款'}",
+		'11' : "{source : {c : '',cust_proto : '',tx_date : '',amt : ''},book_name : '应收账款-客户-定期划付客户手续费'}",
+		'12' : "{source : {c : '',bi : '',p : '',amt : ''},book_name : '成本-银行手续费支出'}",
+		'13' : "{source : {p : '',amt : ''},book_name : '成本-垫付损失'}",
+		'14' : "{source : {bfj_acct : '',amt : ''},'book_name' : '银行存款-备付金存款'}",
+		'15' : "{source : {zyzj_acct : '',amt : ''},'book_name' : '银行存款-自有资金存款'}",
+		'16' : "{source : {acct : '',amt : '},book_name: '财务费用-金融机构手续费'}",
+		'17' : "{source : {c : '',p : '',amt : ''},book_name : '收入-客户手续费收入'}",
+		'18' : "{source : {acct : '',amt : ''},book_name : '财务费用-账户利息收入'}",
+		'19' : "{source : {bi : '',tx_date : '',amt : ''},book_name : '应收银行-待勾兑应收交易款'}",
+		'20' : "{source : {bi : '',tx_date : '',amt : ''},book_name : '其他应付款-待确认交易款'}",
+		'21' : "{source : {bfj_acct : '',zjbd_type : '',zjbd_date : '',amt : ''},book_name : '应付银行-已核应付交易款'}",
+		'22' : "{source : {bfj_acct : '',zjbd_type : '',zjbd_date : '',amt : ''},book_name : '应收银行-已核应收交易款'}",
+		'23' : "{source : {amt : ''},book_name : '往来-应付备付'}",
+		'24' : "{source : {amt : ''},book_name : '往来-应付自有'}",
+		'25' : "{source : {amt : ''},book_name : '往来-应收备付'}",
+		'26' : "{source : {amt : ''},book_name : '往来-应收自有'}",
+		'27' : "{source : {c : '',cust_proto : '',tx_date : '',amt : ''},book_name : '应收账款-客户-分润方承担品牌费'}",
+		'28' : "{source : {bi : '',tx_date : '',amt : ''},book_name : '其他应收款-待确认交易款'}",
+		'29' : "{source : {bi : '',tx_date : '',amt : ''},book_name : '应付银行-待确认应付交易款'}",
+		'30' : "{source : {c : '',p : '',bi : '',fp : '',tx_date : '',amt : ''},book_name : '应付账款-银行-暂估周期确认银行手续费'}",
+		'31' : "{source : {bi : '',fp : '',tx_date : '',amt : ''},book_name : '应付账款-银行-周期确认银行手续费'}",
+		'32' : "{source : {c : '',p : '',bi : '',fp : '',tx_date : '',amt : ''},book_name : '成本-暂估银行手续费'}",
+		'33' : "{source : {c : '',p : '',amt : ''},book_name : '内部收入'}",
+		'34' : "{source : {c : '',p : '',amt : ''},book_name : '内部成本'}"
 	},
 	initComponent : function() {
 		var form = this;
@@ -448,17 +205,19 @@ Ext.define('Zixweb.view.pzlr.i0000', {
 							if (!j || !d) {
 								return;
 							}
-							var j_options = form.hearders[j];
-							var d_options = form.hearders[d];
+							var j_options = Ext.decode(form.hearders[j]);
+							var d_options = Ext.decode(form.hearders[d]);
 							var j_sourceConfig = {};
 							var d_sourceConfig = {};
 							for (var property in j_options.source) {
+								j_options.source[property] = '';
 								j_sourceConfig[property] = {};
 								j_sourceConfig[property]["editor"] = eval(form.editors[property]);
 								j_sourceConfig[property]["displayName"] = form.names[property];
 								j_sourceConfig[property]["renderer"] = form.renderers[property];
 							}
 							for (var property in d_options.source) {
+								d_options.source[property] = '';
 								d_sourceConfig[property] = {};
 								d_sourceConfig[property]["editor"] = eval(form.editors[property]);
 								d_sourceConfig[property]["displayName"] = form.names[property];
@@ -470,15 +229,25 @@ Ext.define('Zixweb.view.pzlr.i0000', {
 										width : 490,
 										margin : '0 10 0 0',
 										sourceConfig : j_sourceConfig,
-										source : j_options.source
+										source : j_options.source,
+										clicksToEdit : 2,
+										disableSelection : true
 									});
+							// 禁用排序
+							jbook.columns[0].sortable = false;
+							jbook.columns[1].sortable = false;
 							var dbook = Ext.create('Ext.grid.property.Grid', {
 										_type : d,
 										title : "贷方科目：" + d_options.book_name,
 										width : 490,
 										sourceConfig : d_sourceConfig,
-										source : d_options.source
+										source : d_options.source,
+										clicksToEdit : 2,
+										disableSelection : true
 									});
+							// 禁用排序
+							dbook.columns[0].sortable = false;
+							dbook.columns[1].sortable = false;
 							var beforechange = function(source, recordId,
 									value, oldValue, eOpts) {
 								var result = true;
@@ -562,6 +331,19 @@ Ext.define('Zixweb.view.pzlr.i0000', {
 													},
 													success : function(form,
 															action) {
+
+														var result = action.result.success;
+														if (result
+																&& result === 'forbidden') {
+															Ext.MessageBox
+																	.show({
+																		title : '警告',
+																		msg : '抱歉，没有特种调帐单录入权限',
+																		buttons : Ext.Msg.YES,
+																		icon : Ext.Msg.ERROR
+																	});
+															return;
+														}
 														Ext.MessageBox.show({
 															title : '提示',
 															msg : '特种调账单添加成功',
@@ -577,12 +359,34 @@ Ext.define('Zixweb.view.pzlr.i0000', {
 													},
 													failure : function(form,
 															action) {
-														Ext.MessageBox.show({
-															title : '警告',
-															msg : '特种调账单添加失败',
-															buttons : Ext.Msg.YES,
-															icon : Ext.Msg.ERROR
-														});
+														switch (action.failureType) {
+															case Ext.form.action.Action.CLIENT_INVALID :
+																Ext.MessageBox
+																		.show({
+																			title : '失败',
+																			msg : '表单数据有误，请检查',
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
+																break;
+															case Ext.form.action.Action.CONNECT_FAILURE :
+																Ext.MessageBox
+																		.show({
+																			title : '失败',
+																			msg : '网络链接出错',
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
+																break;
+															case Ext.form.action.Action.SERVER_INVALID :
+																Ext.MessageBox
+																		.show({
+																			title : '失败',
+																			msg : action.result.msg,
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
+														}
 													},
 													waitMsg : '请求提交中...',
 													waitTitle : '请稍等'
@@ -634,7 +438,6 @@ Ext.define('Zixweb.view.pzlr.i0000', {
 					} else {
 						data[fl]["j_book"][f] = jbook[f];
 					}
-					// data[fl]["j_book"][f] = jbook[f];
 				}
 				data[fl]["d_book"] = {};
 				data[fl]["d_book"]["_type"] = field[1]["_type"];

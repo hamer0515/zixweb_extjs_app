@@ -49,7 +49,17 @@ Ext.define('Zixweb.view.task.Taskpzcx', {
 							if (!successful) {
 								Ext.MessageBox.show({
 											title : '警告',
-											msg : '数据加载失败,请联系管理员',
+											msg : '凭证撤销审核数据加载失败,请联系管理员',
+											buttons : Ext.Msg.YES,
+											icon : Ext.Msg.ERROR
+										});
+								return;
+							}
+							var jsonData = thiz.proxy.reader.jsonData.success;
+							if (jsonData && jsonData === 'forbidden') {
+								Ext.MessageBox.show({
+											title : '警告',
+											msg : '抱歉，凭证撤销审核数据访问权限',
 											buttons : Ext.Msg.YES,
 											icon : Ext.Msg.ERROR
 										});
@@ -208,10 +218,9 @@ Ext.define('Zixweb.view.task.Taskpzcx', {
 												id : 'yspzq_detail_'
 														+ rec.data.ys_type
 														+ rec.data.ys_id,
-												title : 
-																'凭证'+rec.data.ys_type
-																		+ '详细信息-'
-																		+ rec.data.ys_id
+												title : '凭证' + rec.data.ys_type
+														+ '详细信息-'
+														+ rec.data.ys_id
 											}).show();
 										}
 										viewport.doLayout();
@@ -242,6 +251,17 @@ Ext.define('Zixweb.view.task.Taskpzcx', {
 																var success = Ext
 																		.decode(response.responseText).success;
 																if (success) {
+																	if (response === 'forbidden') {
+																		Ext.MessageBox
+																				.show(
+																						{
+																							title : '警告',
+																							msg : '抱歉，没有审核通过操作权限',
+																							buttons : Ext.Msg.YES,
+																							icon : Ext.Msg.ERROR
+																						});
+																		return;
+																	}
 																	Ext.MessageBox
 																			.alert(
 																					'提示',
@@ -261,7 +281,8 @@ Ext.define('Zixweb.view.task.Taskpzcx', {
 																Ext.MessageBox
 																		.show({
 																			title : '警告',
-																			msg : '服务器出错，请联系管理人员',
+																			msg : '服务器端出错，错误码:'
+																					+ response.status,
 																			buttons : Ext.Msg.YES,
 																			icon : Ext.Msg.ERROR
 																		});
@@ -296,6 +317,17 @@ Ext.define('Zixweb.view.task.Taskpzcx', {
 																var success = Ext
 																		.decode(response.responseText).success;
 																if (success) {
+																	if (response === 'forbidden') {
+																		Ext.MessageBox
+																				.show(
+																						{
+																							title : '警告',
+																							msg : '抱歉，没有审核拒绝操作权限',
+																							buttons : Ext.Msg.YES,
+																							icon : Ext.Msg.ERROR
+																						});
+																		return;
+																	}
 																	Ext.MessageBox
 																			.alert(
 																					'提示',
@@ -315,7 +347,8 @@ Ext.define('Zixweb.view.task.Taskpzcx', {
 																Ext.MessageBox
 																		.show({
 																			title : '警告',
-																			msg : '服务器出错，请联系管理人员',
+																			msg : '服务器端出错，错误码:'
+																					+ response.status,
 																			buttons : Ext.Msg.YES,
 																			icon : Ext.Msg.ERROR
 																		});

@@ -137,10 +137,19 @@ Ext.define('Zixweb.view.task.Task0000detail', {
 					if (!successful) {
 						Ext.MessageBox.show({
 									title : '警告',
-									msg : '数据加载失败,请联系管理员',
+									msg : '凭证0000详细数据加载失败,请联系管理员',
 									buttons : Ext.Msg.YES,
 									icon : Ext.Msg.ERROR
 								});
+						var jsonData = thiz.proxy.reader.jsonData.success;
+						if (jsonData && jsonData === 'forbidden') {
+							Ext.MessageBox.show({
+										title : '警告',
+										msg : '抱歉，没有凭证0000详细数据访问权限',
+										buttons : Ext.Msg.YES,
+										icon : Ext.Msg.ERROR
+									});
+						}
 						return;
 					}
 					var expander = grid.getPlugin('rowexpander');
@@ -172,6 +181,16 @@ Ext.define('Zixweb.view.task.Task0000detail', {
 														var success = Ext
 																.decode(response.responseText).success;
 														if (success) {
+															if (response === 'forbidden') {
+																Ext.MessageBox
+																		.show({
+																			title : '警告',
+																			msg : '抱歉，没有审核通过操作权限',
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
+																return;
+															}
 															Ext.MessageBox
 																	.alert(
 																			'提示',
@@ -188,7 +207,8 @@ Ext.define('Zixweb.view.task.Task0000detail', {
 															response, opts) {
 														Ext.MessageBox.show({
 															title : '警告',
-															msg : '服务器出错，请联系管理人员',
+															msg : '服务器端出错，错误码:'
+																	+ response.status,
 															buttons : Ext.Msg.YES,
 															icon : Ext.Msg.ERROR
 														});
@@ -210,6 +230,16 @@ Ext.define('Zixweb.view.task.Task0000detail', {
 														var success = Ext
 																.decode(response.responseText).success;
 														if (success) {
+															if (response === 'forbidden') {
+																Ext.MessageBox
+																		.show({
+																			title : '警告',
+																			msg : '抱歉，没有审核拒绝操作权限',
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
+																return;
+															}
 															Ext.MessageBox
 																	.alert(
 																			'提示',
@@ -226,7 +256,8 @@ Ext.define('Zixweb.view.task.Task0000detail', {
 															response, opts) {
 														Ext.MessageBox.show({
 															title : '警告',
-															msg : '服务器出错，请联系管理人员',
+															msg : '服务器端出错，错误码:'
+																	+ response.status,
 															buttons : Ext.Msg.YES,
 															icon : Ext.Msg.ERROR
 														});

@@ -154,11 +154,30 @@ Ext.define('Zixweb.view.pzlr.job', {
 									params : data,
 									success : function(response) {
 										var response = Ext
-												.decode(response.responseText).text;
+												.decode(response.responseText);
+										var success = response.success
+										if (success && success === 'forbidden') {
+											Ext.MessageBox.show({
+														title : '警告',
+														msg : '抱歉，没有下載文件操作权限',
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+											return;
+										}
 										Ext.MessageBox.show({
 													title : '日志查看',
-													msg : response,
+													msg : response.text,
 													buttons : Ext.Msg.YES
+												});
+									},
+									failure : function(response, opts) {
+										Ext.MessageBox.show({
+													title : '警告',
+													msg : '服务器端出错，错误码:'
+															+ response.status,
+													buttons : Ext.Msg.YES,
+													icon : Ext.Msg.ERROR
 												});
 									}
 								});
@@ -191,6 +210,16 @@ Ext.define('Zixweb.view.pzlr.job', {
 														var response = Ext
 																.decode(response.responseText).success;
 														if (response) {
+															if (response === 'forbidden') {
+																Ext.MessageBox
+																		.show({
+																			title : '警告',
+																			msg : '抱歉，没有运行任务操作权限',
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
+																return;
+															}
 															Ext.MessageBox
 																	.show({
 																		title : '提示',
@@ -209,6 +238,16 @@ Ext.define('Zixweb.view.pzlr.job', {
 																		icon : Ext.Msg.ERROR
 																	});
 														}
+													},
+													failure : function(
+															response, opts) {
+														Ext.MessageBox.show({
+															title : '警告',
+															msg : '服务器端出错，错误码:'
+																	+ response.status,
+															buttons : Ext.Msg.YES,
+															icon : Ext.Msg.ERROR
+														});
 													}
 												});
 											}

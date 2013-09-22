@@ -4,6 +4,7 @@ Ext.define('Zixweb.view.zjdz.bfjdetail', {
 	border : false,
 
 	initComponent : function() {
+		var bfjdetail = this;
 		var tpl = new Ext.XTemplate(
 				'<tpl for=".">',
 				'<table width="98%" id="zjdzbfj_{acct_id}_{zjbd_date}" border="0" cellspacing="1" cellpadding="0" align="center"  bgcolor="#C8DCF0" class="live_1_table">',
@@ -137,6 +138,28 @@ Ext.define('Zixweb.view.zjdz.bfjdetail', {
 						return data;
 					}
 				});
+		// this.checkjd = function(data) {
+		// var result = true;
+		// for (var key in data) {
+		// if (key === 'acct_id' || key === 'real_bank_ch'
+		// || key === 'zjbd_date') {
+		// continue;
+		// }
+		// var t = key.split('_');
+		// var zjbd_type = t[0];
+		// var type = t[1];
+		// if (type === 'j') {
+		// t[1] = 'd';
+		// var d_key = t.join('_');
+		// if (data[d_key] !== '0.00' && data[key] !== '0.00') {
+		// result = false;
+		// Ext.MessageBox.alert('警告', '资金变动类型[' + zjbd_type
+		// + ']借贷方金额都不为0.00');
+		// }
+		// }
+		// }
+		// return result;
+		// }
 		var store = new Ext.data.Store({
 			fields : ['acct_id', 'b_acct', 'zjbd_date', 'l', 'records',
 					'real_bank_ch', 't_ids', 'data', 'ch_bank'],
@@ -145,7 +168,26 @@ Ext.define('Zixweb.view.zjdz.bfjdetail', {
 				url : 'zjdz/bfjcheck'
 			},
 			listeners : {
-				load : function(thiz, records) {
+				load : function(thiz, records, successful, eOpts) {
+					if (!successful) {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '对账详细数据加载失败,请联系管理员',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
+						return;
+					}
+					var jsonData = thiz.proxy.reader.jsonData.success;
+					if (jsonData && jsonData === 'forbidden') {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '抱歉，没有对账详细数据访问权限',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
+						return;
+					}
 					// input注册事件
 					var id = 'zjdzbfj_' + records[0].data.acct_id + '_'
 							+ records[0].data.zjbd_date;
@@ -167,10 +209,9 @@ Ext.define('Zixweb.view.zjdz.bfjdetail', {
 													'清空贷方金额', function(opt) {
 														if (opt === 'yes') {
 															field.value = '0.00';
+															Ext.getDom(id)
+																	.focus();
 														}
-														var comp = Ext
-																.getDom(id);
-														Ext.getDom(id).focus();
 													});
 										}
 									} else if (type === 'd') {
@@ -182,8 +223,9 @@ Ext.define('Zixweb.view.zjdz.bfjdetail', {
 													'清空借方金额', function(opt) {
 														if (opt === 'yes') {
 															field.value = '0.00';
+															Ext.getDom(id)
+																	.focus();
 														}
-														Ext.getDom(id).focus();
 													});
 										}
 									}
@@ -203,24 +245,25 @@ Ext.define('Zixweb.view.zjdz.bfjdetail', {
 					var checkbtn = Ext.get('checkbtn');
 					if (checkbtn) {
 						checkbtn.on('click', function(e, btn, eOpts) {
-									var id = 'zjdzbfj_'
-											+ records[0].data.acct_id + '_'
-											+ records[0].data.zjbd_date;
-									var tbl = Ext.get(id);
-									var fields = tbl.select("input[type=text]");
-									var data = {};
-									for (var i in fields.elements) {
-										var field = fields.elements[i];
-										var key = field.getAttribute('name');
-										var value = field.value;
-										data[key] = value;
-									}
-									data.zjbd_date = records[0].data.zjbd_date;
-									data.acct_id = records[0].data.acct_id;
-									store.load({
-												params : data
-											});
-								}, self);
+							var id = 'zjdzbfj_' + records[0].data.acct_id + '_'
+									+ records[0].data.zjbd_date;
+							var tbl = Ext.get(id);
+							var fields = tbl.select("input[type=text]");
+							var data = {};
+							for (var i in fields.elements) {
+								var field = fields.elements[i];
+								var key = field.getAttribute('name');
+								var value = field.value;
+								data[key] = value;
+							}
+							data.zjbd_date = records[0].data.zjbd_date;
+							data.acct_id = records[0].data.acct_id;
+							// if (bfjdetail.checkjd(data)) {
+							store.load({
+										params : data
+									});
+								// }
+							}, self);
 					}
 					// 注册对账完成事件
 					var checkdonebtn = Ext.get('checkdonebtn');
@@ -289,6 +332,16 @@ Ext.define('Zixweb.view.zjdz.bfjdetail', {
 													valiStatus = Ext
 															.decode(response.responseText).success;
 													if (valiStatus) {
+														if (valiStatus === 'forbidden') {
+															Ext.MessageBox
+																	.show({
+																		title : '警告',
+																		msg : '抱歉，没有对账完成操作权限',
+																		buttons : Ext.Msg.YES,
+																		icon : Ext.Msg.ERROR
+																	});
+															return;
+														}
 														Ext.MessageBox.alert(
 																'提示', '处理成功',
 																function() {
@@ -300,6 +353,16 @@ Ext.define('Zixweb.view.zjdz.bfjdetail', {
 														Ext.MessageBox.alert(
 																'警告', '处理失败');
 													}
+												},
+												failure : function(response,
+														opts) {
+													Ext.MessageBox.show({
+														title : '警告',
+														msg : '服务器端出错，错误码:'
+																+ response.status,
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
 												}
 											});
 										}

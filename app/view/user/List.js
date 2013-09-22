@@ -33,7 +33,17 @@ Ext.define('Zixweb.view.user.List', {
 					if (!successful) {
 						Ext.MessageBox.show({
 									title : '警告',
-									msg : '数据加载失败,请联系管理员',
+									msg : '用户列表加载失败,请联系管理员',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
+						return;
+					}
+					var jsonData = thiz.proxy.reader.jsonData.success;
+					if (jsonData && jsonData === 'forbidden') {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '抱歉，没有用户列表访问权限',
 									buttons : Ext.Msg.YES,
 									icon : Ext.Msg.ERROR
 								});

@@ -9,7 +9,7 @@ Ext.define('Zixweb.view.book.AllBooks', {
 
 		Ext.apply(this, {
 			store : new Ext.data.TreeStore({
-						fields : ['text', 'j', 'd', 'url'],
+						fields : ['text', 'j', 'd', 'url', 'success'],
 						autoload : true,
 						proxy : {
 							type : 'ajax',
@@ -20,7 +20,17 @@ Ext.define('Zixweb.view.book.AllBooks', {
 								if (!successful) {
 									Ext.MessageBox.show({
 												title : '警告',
-												msg : '数据加载失败,请联系管理员',
+												msg : '总帐套数据加载失败,请联系管理员',
+												buttons : Ext.Msg.YES,
+												icon : Ext.Msg.ERROR
+											});
+									return;
+								}
+								var jsonData = thiz.proxy.reader.jsonData.success;
+								if (jsonData && jsonData === 'forbidden') {
+									Ext.MessageBox.show({
+												title : '警告',
+												msg : '抱歉，没有总帐套数据访问权限',
 												buttons : Ext.Msg.YES,
 												icon : Ext.Msg.ERROR
 											});

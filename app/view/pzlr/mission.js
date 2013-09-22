@@ -32,7 +32,16 @@ Ext.define('Zixweb.view.pzlr.mission', {
 					if (!successful) {
 						Ext.MessageBox.show({
 									title : '警告',
-									msg : '数据加载失败',
+									msg : '凭证导入数据加载失败',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
+					}
+					var jsonData = thiz.proxy.reader.jsonData.success;
+					if (jsonData && jsonData === 'forbidden') {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '抱歉，没有凭证导入数据访问权限',
 									buttons : Ext.Msg.YES,
 									icon : Ext.Msg.ERROR
 								});
@@ -199,6 +208,17 @@ Ext.define('Zixweb.view.pzlr.mission', {
 																var response = Ext
 																		.decode(response.responseText).success;
 																if (response) {
+																	if (response === 'forbidden') {
+																		Ext.MessageBox
+																				.show(
+																						{
+																							title : '警告',
+																							msg : '抱歉，没有下載文件操作权限',
+																							buttons : Ext.Msg.YES,
+																							icon : Ext.Msg.ERROR
+																						});
+																		return;
+																	}
 																	Ext.MessageBox
 																			.show(
 																					{
@@ -220,6 +240,18 @@ Ext.define('Zixweb.view.pzlr.mission', {
 																						icon : Ext.Msg.ERROR
 																					});
 																}
+															},
+															failure : function(
+																	response,
+																	opts) {
+																Ext.MessageBox
+																		.show({
+																			title : '警告',
+																			msg : '服务器端出错，错误码:'
+																					+ response.status,
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
 															}
 														});
 													}
@@ -255,6 +287,17 @@ Ext.define('Zixweb.view.pzlr.mission', {
 																var response = Ext
 																		.decode(response.responseText).success;
 																if (response) {
+																	if (response === 'forbidden') {
+																		Ext.MessageBox
+																				.show(
+																						{
+																							title : '警告',
+																							msg : '抱歉，没有分配任务操作权限',
+																							buttons : Ext.Msg.YES,
+																							icon : Ext.Msg.ERROR
+																						});
+																		return;
+																	}
 																	Ext.MessageBox
 																			.show(
 																					{
@@ -276,6 +319,18 @@ Ext.define('Zixweb.view.pzlr.mission', {
 																						icon : Ext.Msg.ERROR
 																					});
 																}
+															},
+															failure : function(
+																	response,
+																	opts) {
+																Ext.MessageBox
+																		.show({
+																			title : '警告',
+																			msg : '服务器端出错，错误码:'
+																					+ response.status,
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
 															}
 														});
 													}
@@ -311,6 +366,17 @@ Ext.define('Zixweb.view.pzlr.mission', {
 																var response = Ext
 																		.decode(response.responseText).success;
 																if (response) {
+																	if (response === 'forbidden') {
+																		Ext.MessageBox
+																				.show(
+																						{
+																							title : '警告',
+																							msg : '抱歉，没有启动任务操作权限',
+																							buttons : Ext.Msg.YES,
+																							icon : Ext.Msg.ERROR
+																						});
+																		return;
+																	}
 																	Ext.MessageBox
 																			.show(
 																					{
@@ -332,6 +398,18 @@ Ext.define('Zixweb.view.pzlr.mission', {
 																						icon : Ext.Msg.ERROR
 																					});
 																}
+															},
+															failure : function(
+																	response,
+																	opts) {
+																Ext.MessageBox
+																		.show({
+																			title : '警告',
+																			msg : '服务器端出错，错误码:'
+																					+ response.status,
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
 															}
 														});
 													}
@@ -367,6 +445,17 @@ Ext.define('Zixweb.view.pzlr.mission', {
 																var response = Ext
 																		.decode(response.responseText).success;
 																if (response) {
+																	if (response === 'forbidden') {
+																		Ext.MessageBox
+																				.show(
+																						{
+																							title : '警告',
+																							msg : '抱歉，没有重新下载操作权限',
+																							buttons : Ext.Msg.YES,
+																							icon : Ext.Msg.ERROR
+																						});
+																		return;
+																	}
 																	Ext.MessageBox
 																			.show(
 																					{
@@ -388,6 +477,18 @@ Ext.define('Zixweb.view.pzlr.mission', {
 																						icon : Ext.Msg.ERROR
 																					});
 																}
+															},
+															failure : function(
+																	response,
+																	opts) {
+																Ext.MessageBox
+																		.show({
+																			title : '警告',
+																			msg : '服务器端出错，错误码:'
+																					+ response.status,
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
 															}
 														});
 													}
@@ -423,6 +524,17 @@ Ext.define('Zixweb.view.pzlr.mission', {
 																var response = Ext
 																		.decode(response.responseText).success;
 																if (response) {
+																	if (response === 'forbidden') {
+																		Ext.MessageBox
+																				.show(
+																						{
+																							title : '警告',
+																							msg : '抱歉，没有重新分配操作权限',
+																							buttons : Ext.Msg.YES,
+																							icon : Ext.Msg.ERROR
+																						});
+																		return;
+																	}
 																	Ext.MessageBox
 																			.show(
 																					{
@@ -444,6 +556,18 @@ Ext.define('Zixweb.view.pzlr.mission', {
 																						icon : Ext.Msg.ERROR
 																					});
 																}
+															},
+															failure : function(
+																	response,
+																	opts) {
+																Ext.MessageBox
+																		.show({
+																			title : '警告',
+																			msg : '服务器端出错，错误码:'
+																					+ response.status,
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
 															}
 														});
 													}

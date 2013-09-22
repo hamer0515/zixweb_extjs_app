@@ -25,15 +25,7 @@ Ext.define('Zixweb.controller.Component', {
 					'Zixweb.view.component.YsType'],
 
 			init : function() {
-				this.control({
-							'gridpanel button[action=yspzqdetail]' : {
-								handler : this.yspzdetail
-							}
-						});
-			},
-
-			yspzdetail : function(grid, rowIndex, colIndex) {
-				alert(rowIndex);
+				this.control();
 			}
 
 		});

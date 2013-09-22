@@ -48,32 +48,41 @@ Ext.define('Zixweb.view.user.Edit', {
 						height : 300,
 						fieldLabel : '角色选择',
 						store : new Ext.data.Store({
-									fields : ['name', 'role_id'],
-									autoLoad : true,
+							fields : ['name', 'role_id'],
+							autoLoad : true,
 
-									proxy : {
-										type : 'ajax',
-										api : {
-											read : '/base/allroles'
-										},
-										reader : {
-											type : 'json'
-										}
-									},
-									listeners : {
-										load : function(thiz, records,
-												successful, eOpts) {
-											if (!successful) {
-												Ext.MessageBox.show({
-															title : '警告',
-															msg : '数据加载失败,请联系管理员',
-															buttons : Ext.Msg.YES,
-															icon : Ext.Msg.ERROR
-														});
-											}
-										}
+							proxy : {
+								type : 'ajax',
+								api : {
+									read : '/base/allroles'
+								},
+								reader : {
+									type : 'json'
+								}
+							},
+							listeners : {
+								load : function(thiz, records, successful,
+										eOpts) {
+									if (!successful) {
+										Ext.MessageBox.show({
+													title : '警告',
+													msg : '数据加载失败,请联系管理员',
+													buttons : Ext.Msg.YES,
+													icon : Ext.Msg.ERROR
+												});
 									}
-								}),
+									var jsonData = thiz.proxy.reader.jsonData.success;
+									if (jsonData && jsonData === 'forbidden') {
+										Ext.MessageBox.show({
+													title : '警告',
+													msg : '抱歉，没有角色列表访问权限',
+													buttons : Ext.Msg.YES,
+													icon : Ext.Msg.ERROR
+												});
+									}
+								}
+							}
+						}),
 						displayField : 'name',
 						valueField : 'role_id',
 						allowBlank : false,

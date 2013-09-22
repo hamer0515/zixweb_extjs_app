@@ -44,12 +44,31 @@ Ext.define('Zixweb.controller.Roles', {
 											});
 								},
 								failure : function(form, action) {
-									Ext.MessageBox.show({
-												title : '警告',
-												msg : '角色添加失败',
-												buttons : Ext.Msg.YES,
-												icon : Ext.Msg.ERROR
-											});
+									switch (action.failureType) {
+										case Ext.form.action.Action.CLIENT_INVALID :
+											Ext.MessageBox.show({
+														title : '失败',
+														msg : '表单数据有误，请检查',
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+											break;
+										case Ext.form.action.Action.CONNECT_FAILURE :
+											Ext.MessageBox.show({
+														title : '失败',
+														msg : '网络链接出错',
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+											break;
+										case Ext.form.action.Action.SERVER_INVALID :
+											Ext.MessageBox.show({
+														title : '失败',
+														msg : action.result.msg,
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+									}
 								},
 								waitMsg : '请求提交中...',
 								waitTitle : '请稍等'
@@ -88,12 +107,31 @@ Ext.define('Zixweb.controller.Roles', {
 											});
 								},
 								failure : function(form, action) {
-									Ext.MessageBox.show({
-												title : '警告',
-												msg : '角色更新失败',
-												buttons : Ext.Msg.YES,
-												icon : Ext.Msg.ERROR
-											});
+									switch (action.failureType) {
+										case Ext.form.action.Action.CLIENT_INVALID :
+											Ext.MessageBox.show({
+														title : '失败',
+														msg : '表单数据有误，请检查',
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+											break;
+										case Ext.form.action.Action.CONNECT_FAILURE :
+											Ext.MessageBox.show({
+														title : '失败',
+														msg : '网络链接出错',
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+											break;
+										case Ext.form.action.Action.SERVER_INVALID :
+											Ext.MessageBox.show({
+														title : '失败',
+														msg : action.result.msg,
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+									}
 								},
 								waitMsg : '请求提交中...',
 								waitTitle : '请稍等'
