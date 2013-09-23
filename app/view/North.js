@@ -11,16 +11,22 @@ Ext.define('Zixweb.view.North', {
 				this.items = [{
 							xtype : 'image',
 							border : false,
+							height : 39,
+							width : 127,
 							src : '../images/yeepay_logo.jpg',
 							margin : '0 0 0 20'
 						}, {
 							xtype : 'image',
 							border : false,
+							height : 39,
+							width : 158,
 							src : '../images/logo_title.png',
 							margin : '0 0 0 40'
 						}, {
 							xtype : 'image',
 							border : false,
+							height : 16,
+							width : 16,
 							src : '../images/door_in.png',
 							margin : "0 0 0 800"
 						}, {

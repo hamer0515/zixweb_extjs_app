@@ -80,10 +80,6 @@ Ext.define('Zixweb.view.book.AllBooks', {
 								var viewport = grid.up('viewport'), center = viewport
 										.down('center'), id = 'book_detail_'
 										+ rec.data.url, cmp = Ext.getCmp(id);
-								var store = Ext.data.StoreManager
-										.lookup('Zixweb.store.book.detail.'
-												+ rec.data.url);
-								store.removeAll(true);
 								if (cmp) {
 									center.setActiveTab(cmp);
 								} else {

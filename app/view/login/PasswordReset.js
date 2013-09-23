@@ -2,7 +2,6 @@ Ext.define('Zixweb.view.login.PasswordReset', {
 			extend : 'Ext.form.Panel',
 			alias : 'widget.passwordreset',
 
-//			title : '可以设置新密码了',
 			autoShow : true,
 
 			initComponent : function() {

@@ -8,14 +8,6 @@ Ext.define('Zixweb.view.component.Routes', {
 			border : false,
 
 			initComponent : function() {
-				// var store = new Ext.data.TreeStore({
-				// fields : ['text', 'route_id'],
-				// proxy : {
-				// type : 'ajax',
-				// url : 'base/routes'
-				// }
-				// });
-				// this.store = store;
 				this.items = [{
 							xtype : 'checkboxgroup',
 							fieldLabel : '权限选择',

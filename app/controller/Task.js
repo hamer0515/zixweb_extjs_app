@@ -7,6 +7,5 @@ Ext.define('Zixweb.controller.Task', {
 					'Zixweb.view.task.Taskmy'],
 
 			init : function() {
-				this.control({});
 			}
 		});

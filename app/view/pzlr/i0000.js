@@ -331,31 +331,40 @@ Ext.define('Zixweb.view.pzlr.i0000', {
 													},
 													success : function(form,
 															action) {
-
 														var result = action.result.success;
-														if (result
-																&& result === 'forbidden') {
+														if (result) {
+															if (result === 'forbidden') {
+																Ext.MessageBox
+																		.show({
+																			title : '警告',
+																			msg : '抱歉，没有特种调帐单录入权限',
+																			buttons : Ext.Msg.YES,
+																			icon : Ext.Msg.ERROR
+																		});
+																return;
+															}
 															Ext.MessageBox
 																	.show({
-																		title : '警告',
-																		msg : '抱歉，没有特种调帐单录入权限',
+																		title : '提示',
+																		msg : '特种调账单添加成功',
+																		closable : false,
+																		buttons : Ext.Msg.YES,
+																		icon : Ext.Msg.INFO,
+																		fn : function() {
+																			Ext
+																					.getCmp('center_i0000')
+																					.close();
+																		}
+																	});
+														} else {
+															Ext.MessageBox
+																	.show({
+																		title : '失败',
+																		msg : action.result.msg,
 																		buttons : Ext.Msg.YES,
 																		icon : Ext.Msg.ERROR
 																	});
-															return;
 														}
-														Ext.MessageBox.show({
-															title : '提示',
-															msg : '特种调账单添加成功',
-															closable : false,
-															buttons : Ext.Msg.YES,
-															icon : Ext.Msg.INFO,
-															fn : function() {
-																Ext
-																		.getCmp('center_i0000')
-																		.close();
-															}
-														});
 													},
 													failure : function(form,
 															action) {

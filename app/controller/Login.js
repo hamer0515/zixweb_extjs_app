@@ -26,8 +26,28 @@ Ext.define('Zixweb.controller.Login', {
 								clientValidation : true,
 								url : panel.url,
 								success : function(form, action) {
-									Ext.MessageBox.wait('登录成功，努力加载中...', '请稍等');
-									window.location.href = "/index.html";
+									var response = action.result.success;
+									if (response) {
+										if (response == 'forbidden') {
+											Ext.MessageBox.show({
+														title : '警告',
+														msg : '抱歉，没有登录操作权限',
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+											return;
+										}
+										Ext.MessageBox.wait('登录成功，努力加载中...',
+												'请稍等');
+										window.location.href = "/index.html";
+									} else {
+										Ext.MessageBox.show({
+													title : '警告',
+													msg : action.result.msg,
+													buttons : Ext.Msg.YES,
+													icon : Ext.Msg.ERROR
+												});
+									}
 								},
 								failure : function(form, action) {
 									Ext.MessageBox.show({
@@ -50,13 +70,32 @@ Ext.define('Zixweb.controller.Login', {
 								clientValidation : true,
 								url : panel.url,
 								success : function(form, action) {
-									Ext.MessageBox.show({
-												title : '提示',
-												msg : '密码修改成功',
-												buttons : Ext.Msg.YES,
-												icon : Ext.Msg.INFO
-											});
-									form.reset();
+									var response = action.result.success;
+									if (response) {
+										if (response == 'forbidden') {
+											Ext.MessageBox.show({
+														title : '警告',
+														msg : '抱歉，没有密码修改操作权限',
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+											return;
+										}
+										Ext.MessageBox.show({
+													title : '提示',
+													msg : '密码修改成功',
+													buttons : Ext.Msg.YES,
+													icon : Ext.Msg.INFO
+												});
+										form.reset();
+									} else {
+										Ext.MessageBox.show({
+													title : '失败',
+													msg : action.result.msg,
+													buttons : Ext.Msg.YES,
+													icon : Ext.Msg.ERROR
+												});
+									}
 								},
 								failure : function(form, action) {
 									switch (action.failureType) {

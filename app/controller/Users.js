@@ -24,20 +24,40 @@ Ext.define('Zixweb.controller.Users', {
 									roles : roles
 								},
 								success : function(form, action) {
-									var list = Ext.getCmp('center_userlist');
-									var items = list.items.items;
-									items[0].getStore().reload();
-									Ext.MessageBox.show({
-												title : '提示',
-												msg : '用户添加成功',
-												closable : false,
-												buttons : Ext.Msg.YES,
-												icon : Ext.Msg.INFO,
-												scope : panel.up('window'),
-												fn : function() {
-													this.close();
-												}
-											});
+									var response = action.result.success;
+									if (response) {
+										if (response == 'forbidden') {
+											Ext.MessageBox.show({
+														title : '警告',
+														msg : '抱歉，没有用户添加操作权限',
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+											return;
+										}
+										var list = Ext
+												.getCmp('center_userlist');
+										var items = list.items.items;
+										items[0].getStore().reload();
+										Ext.MessageBox.show({
+													title : '提示',
+													msg : '用户添加成功',
+													closable : false,
+													buttons : Ext.Msg.YES,
+													icon : Ext.Msg.INFO,
+													scope : panel.up('window'),
+													fn : function() {
+														this.close();
+													}
+												});
+									} else {
+										Ext.MessageBox.show({
+													title : '失败',
+													msg : action.result.msg,
+													buttons : Ext.Msg.YES,
+													icon : Ext.Msg.ERROR
+												});
+									}
 								},
 								failure : function(form, action) {
 									switch (action.failureType) {
@@ -83,20 +103,40 @@ Ext.define('Zixweb.controller.Users', {
 									roles : roles
 								},
 								success : function(form, action) {
-									var list = Ext.getCmp('center_userlist');
-									var items = list.items.items;
-									items[0].getStore().reload();
-									Ext.MessageBox.show({
-												title : '提示',
-												msg : '用户更新成功',
-												closable : false,
-												buttons : Ext.Msg.YES,
-												icon : Ext.Msg.INFO,
-												scope : panel.up('window'),
-												fn : function() {
-													this.close();
-												}
-											});
+									var response = action.result.success;
+									if (response) {
+										if (response == 'forbidden') {
+											Ext.MessageBox.show({
+														title : '警告',
+														msg : '抱歉，没有用户更新操作权限',
+														buttons : Ext.Msg.YES,
+														icon : Ext.Msg.ERROR
+													});
+											return;
+										}
+										var list = Ext
+												.getCmp('center_userlist');
+										var items = list.items.items;
+										items[0].getStore().reload();
+										Ext.MessageBox.show({
+													title : '提示',
+													msg : '用户更新成功',
+													closable : false,
+													buttons : Ext.Msg.YES,
+													icon : Ext.Msg.INFO,
+													scope : panel.up('window'),
+													fn : function() {
+														this.close();
+													}
+												});
+									} else {
+										Ext.MessageBox.show({
+													title : '失败',
+													msg : action.result.msg,
+													buttons : Ext.Msg.YES,
+													icon : Ext.Msg.ERROR
+												});
+									}
 								},
 								failure : function(form, action) {
 									switch (action.failureType) {

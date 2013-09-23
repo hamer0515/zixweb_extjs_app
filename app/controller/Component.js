@@ -10,7 +10,8 @@ Ext.define('Zixweb.controller.Component', {
 					'Zixweb.store.component.ZjbdType',
 					'Zixweb.store.component.Books',
 					'Zixweb.store.component.Product',
-					'Zixweb.store.component.YsType'],
+					'Zixweb.store.component.YsType',
+					'Zixweb.store.component.ZQQRStatus'],
 			views : ['Zixweb.view.component.Acct',
 					'Zixweb.view.component.BfjAcct',
 					'Zixweb.view.component.Bi',
@@ -22,10 +23,11 @@ Ext.define('Zixweb.controller.Component', {
 					'Zixweb.view.component.SHType',
 					'Zixweb.view.component.Books',
 					'Zixweb.view.component.Product',
-					'Zixweb.view.component.YsType'],
+					'Zixweb.view.component.YsType',
+					'Zixweb.view.component.ZQQRStatus',
+					'Zixweb.view.component.HSX'],
 
 			init : function() {
-				this.control();
 			}
 
 		});

@@ -115,7 +115,9 @@ Ext.define('Zixweb.view.yspz.yspzq.Detail', {
 	initComponent : function() {
 		var grid = this;
 		var store = new Ext.data.Store({
-			model : 'Zixweb.model.yspz.yspzq.Detail',
+			fields : ['title', 'ys_type', 'cause', 'memo', 'revoke_flag',
+					'revoke_cause', 'period', 'ys_id', 'properties', 'j_book',
+					'd_book', 'isdetail', 'j_amt', 'd_amt'],
 			proxy : {
 				type : 'ajax',
 				url : 'yspzq/detail'

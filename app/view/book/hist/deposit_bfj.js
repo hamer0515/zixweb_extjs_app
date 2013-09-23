@@ -43,20 +43,21 @@ Ext.define('Zixweb.view.book.hist.deposit_bfj', {
 						if (!successful) {
 							Ext.MessageBox.show({
 										title : '警告',
-										msg : '备付金存款科目数据加载失败,请联系管理员',
+										msg : '备付金存款科目历史数据加载失败,请联系管理员',
+										buttons : Ext.Msg.YES,
+										icon : Ext.Msg.ERROR
+									});
+							return;
+						}
+						var jsonData = thiz.proxy.reader.jsonData.success;
+						if (jsonData && jsonData === 'forbidden') {
+							Ext.MessageBox.show({
+										title : '警告',
+										msg : '抱歉，没有备付金存款科目历史数据访问权限',
 										buttons : Ext.Msg.YES,
 										icon : Ext.Msg.ERROR
 									});
 						}
-						var jsonData = thiz.proxy.reader.jsonData.success;
-								if (jsonData && jsonData === 'forbidden') {
-									Ext.MessageBox.show({
-												title : '警告',
-												msg : '抱歉，没有备付金存款科目数据访问权限',
-												buttons : Ext.Msg.YES,
-												icon : Ext.Msg.ERROR
-											});
-								}
 					}
 				}
 			}
@@ -222,8 +223,8 @@ Ext.define('Zixweb.view.book.hist.deposit_bfj', {
 								sortable : false,
 								flex : 1,
 								renderer : function(value) {
-									return Ext.util.Format.number(value,
-											'0,0.00');
+									return Ext.util.Format.number(
+											parseInt(value) / 100, '0,0.00');
 								}
 							}, {
 								text : "贷方金额",
@@ -231,8 +232,8 @@ Ext.define('Zixweb.view.book.hist.deposit_bfj', {
 								flex : 1,
 								sortable : false,
 								renderer : function(value) {
-									return Ext.util.Format.number(value,
-											'0,0.00');
+									return Ext.util.Format.number(
+											parseInt(value) / 100, '0,0.00');
 								}
 							}, {
 								xtype : 'actioncolumn',

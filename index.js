@@ -8,7 +8,7 @@ Ext.application({
 
 	appFolder : 'app',
 	controllers : ['West', 'Login', 'Component', 'Roles', 'Users', 'Routes',
-			'Books', 'Yspz', 'Task', 'Pzlr', 'Zjdz'],
+			'Books', 'Yspz', 'Task', 'Pzlr', 'Zjdz', 'Zqqr'],
 	views : ['Zixweb.view.North', 'Zixweb.view.South', 'Zixweb.view.Center'],
 	stores : [],
 
@@ -58,8 +58,21 @@ Ext.application({
 					verifypwdText : '密码不一致'// 验证错误出现的提示
 				});
 		Ext.apply(Ext.form.field.VTypes, {
+					beforecurrentdate : function(val, field) {
+						var valiStatus = false;// 验证状态
+						var from = new Date(val);
+						var to = new Date();
+						var interval = from.dateDiff('d', to);
+						if (interval > 0) {
+							valiStatus = true;
+						}
+						return valiStatus;
+					},
+					beforecurrentdateText : '日期值必须小于当前日期'// 验证错误出现的提示
+				});
+		Ext.apply(Ext.form.field.VTypes, {
 			remoteverify : function(val, field) {
-				var valiStatus = true;// 验证状态
+				var valiStatus = false;// 验证状态
 				var url = field.verify.url;
 				var id = -1;
 				if (field.verify.id)
@@ -75,7 +88,13 @@ Ext.application({
 								valiStatus = Ext.decode(response.responseText).success;
 							},
 							failure : function(response, opts) {
-								Ext.MessageBox.alert('服务器出错，请联系管理人员');
+								Ext.MessageBox.show({
+											title : '警告',
+											msg : '服务器端出错，错误码:'
+													+ response.status,
+											buttons : Ext.Msg.YES,
+											icon : Ext.Msg.ERROR
+										});
 							}
 						});
 				return valiStatus;

@@ -62,6 +62,11 @@ a {
 	margin-right: 5px;
 }
 
+.generate {
+	background-image: url('../images/icons/generate.png');
+	margin-right: 5px;
+}
+
 .detail {
 	background-image: url('../images/icons/detail.png');
 	margin-right: 5px;
