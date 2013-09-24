@@ -53,6 +53,7 @@ Ext.define('Zixweb.view.task.Taskmy', {
 											buttons : Ext.Msg.YES,
 											icon : Ext.Msg.ERROR
 										});
+								return;
 							}
 							var jsonData = thiz.proxy.reader.jsonData.success;
 							if (jsonData && jsonData === 'forbidden') {

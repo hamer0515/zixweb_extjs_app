@@ -123,7 +123,26 @@ Ext.define('Zixweb.view.yspz.yspzq.Detail', {
 				url : 'yspzq/detail'
 			},
 			listeners : {
-				load : function() {
+				load : function(thiz, records, successful, eOpts) {
+					if (!successful) {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '原始凭证详细数据加载失败,请联系管理员',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
+						return;
+					}
+					var jsonData = thiz.proxy.reader.jsonData.success;
+					if (jsonData && jsonData === 'forbidden') {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '抱歉，没有原始凭证详细数据访问权限',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
+						return;
+					}
 					var expander = grid.getPlugin('rowexpander');
 					for (i = 0; i < grid.getStore().getCount(); i++) {
 						expander.toggleRow(i, grid.getStore().getAt(i));

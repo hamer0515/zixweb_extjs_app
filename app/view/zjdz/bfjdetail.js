@@ -138,28 +138,6 @@ Ext.define('Zixweb.view.zjdz.bfjdetail', {
 						return data;
 					}
 				});
-		// this.checkjd = function(data) {
-		// var result = true;
-		// for (var key in data) {
-		// if (key === 'acct_id' || key === 'real_bank_ch'
-		// || key === 'zjbd_date') {
-		// continue;
-		// }
-		// var t = key.split('_');
-		// var zjbd_type = t[0];
-		// var type = t[1];
-		// if (type === 'j') {
-		// t[1] = 'd';
-		// var d_key = t.join('_');
-		// if (data[d_key] !== '0.00' && data[key] !== '0.00') {
-		// result = false;
-		// Ext.MessageBox.alert('警告', '资金变动类型[' + zjbd_type
-		// + ']借贷方金额都不为0.00');
-		// }
-		// }
-		// }
-		// return result;
-		// }
 		var store = new Ext.data.Store({
 			fields : ['acct_id', 'b_acct', 'zjbd_date', 'l', 'records',
 					'real_bank_ch', 't_ids', 'data', 'ch_bank'],

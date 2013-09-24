@@ -140,21 +140,6 @@ Ext.define('Zixweb.view.book.detail.deposit_bfj', {
 										}, {
 											'value' : "period",
 											'name' : "期间日期"
-										}, {
-											'value' : 'aa',
-											'name' : 'aa'
-										}, {
-											'value' : '111',
-											'name' : '111'
-										}, {
-											'value' : '222',
-											'name' : '222'
-										}, {
-											'value' : '333',
-											'name' : '333'
-										}, {
-											'value' : '444',
-											'name' : '444'
 										}]
 							}, {
 								xtype : 'button',

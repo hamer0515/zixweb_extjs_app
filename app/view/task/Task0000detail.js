@@ -141,15 +141,16 @@ Ext.define('Zixweb.view.task.Task0000detail', {
 									buttons : Ext.Msg.YES,
 									icon : Ext.Msg.ERROR
 								});
-						var jsonData = thiz.proxy.reader.jsonData.success;
-						if (jsonData && jsonData === 'forbidden') {
-							Ext.MessageBox.show({
-										title : '警告',
-										msg : '抱歉，没有凭证0000详细数据访问权限',
-										buttons : Ext.Msg.YES,
-										icon : Ext.Msg.ERROR
-									});
-						}
+						return;
+					}
+					var jsonData = thiz.proxy.reader.jsonData.success;
+					if (jsonData && jsonData === 'forbidden') {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '抱歉，没有凭证0000详细数据访问权限',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
 						return;
 					}
 					var expander = grid.getPlugin('rowexpander');

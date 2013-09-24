@@ -175,7 +175,17 @@ Ext.define('Zixweb.view.task.Taskpzcxdetail', {
 					if (!successful) {
 						Ext.MessageBox.show({
 									title : '警告',
-									msg : '数据加载失败,请联系管理员',
+									msg : '凭证撤销详细数据加载失败,请联系管理员',
+									buttons : Ext.Msg.YES,
+									icon : Ext.Msg.ERROR
+								});
+						return;
+					}
+					var jsonData = thiz.proxy.reader.jsonData.success;
+					if (jsonData && jsonData === 'forbidden') {
+						Ext.MessageBox.show({
+									title : '警告',
+									msg : '抱歉，没有凭证撤销详细数据访问权限',
 									buttons : Ext.Msg.YES,
 									icon : Ext.Msg.ERROR
 								});
