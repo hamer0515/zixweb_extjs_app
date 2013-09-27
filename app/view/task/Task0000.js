@@ -213,8 +213,7 @@ Ext.define('Zixweb.view.task.Task0000', {
 												items : task0000detail,
 												id : 'center_task0000_detail_'
 														+ rec.data.id,
-												title : '0000录入' + '详细信息-'
-														+ rec.data.id
+												title : '0000录入审核编号' +rec.data.id+ '详细信息'
 											}).show();
 										}
 										viewport.doLayout();

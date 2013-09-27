@@ -158,6 +158,11 @@ Ext.define('Zixweb.view.zjdz.bfj', {
 								if (cmp) {
 									center.setActiveTab(cmp);
 								} else {
+									var bfjacct = Ext.data.StoreManager
+											.lookup('Zixweb.store.component.BfjAcct');
+									var index = bfjacct.findExact('id',
+											rec.data.b_acct);
+									var acct = bfjacct.getAt(index).data.name;
 									var zjdzbfjdetail = Ext
 											.createByAlias('widget.zjdzbfjdetail');
 									zjdzbfjdetail.store.load({
@@ -171,9 +176,8 @@ Ext.define('Zixweb.view.zjdz.bfj', {
 										xtype : 'panel',
 										items : zjdzbfjdetail,
 										id : 'zjdz_bfj_detail',
-										title : Ext.String.ellipsis('资金对账'
-														+ rec.data.zjdz_date,
-												8, true)
+										title : acct + '帐号'
+												+ rec.data.zjdz_date + '日资金对账'
 									}).show();
 								}
 								viewport.doLayout();

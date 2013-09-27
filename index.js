@@ -1,20 +1,73 @@
 Ext.application({
 	requires : ['Ext.container.Viewport', 'Ext.ux.TabScrollerMenu',
-			'Ext.toolbar.Paging', 'Ext.ux.form.ItemSelector',
-			'Ext.grid.plugin.RowExpander'],
+			'Ext.toolbar.Paging', 'Ext.grid.plugin.RowExpander',
+			'Ext.ux.TabScrollerMenu', 'Ext.ux.TabCloseMenu'],
 	name : 'Zixweb',
-	minHeight : 600,
-	minWidth : 800,
+	minHeight : 768,
+	minWidth : 1024,
 
 	appFolder : 'app',
-	controllers : ['West', 'Login', 'Component', 'Roles', 'Users', 'Routes',
-			'Books', 'Yspz', 'Task', 'Pzlr', 'Zjdz', 'Zqqr'],
-	views : ['Zixweb.view.North', 'Zixweb.view.South', 'Zixweb.view.Center'],
-	stores : [],
+	controllers : ['Index', 'Login', 'Component', 'Roles', 'Users', 'Routes',
+			'Books', 'Yspz', 'Task', 'Pzlr', 'Zjdz', 'Zqqr', 'Login'],
 
 	launch : function() {
 		Ext.override(Ext.grid.View, {
 					enableTextSelection : true
+				});
+		Ext.override(Ext.ux.TabCloseMenu, {
+					createMenu : function() {
+						var me = this;
+
+						if (!me.menu) {
+							var items = [{
+										text : me.closeTabText,
+										iconCls : this.closeTabIconCls,
+										scope : me,
+										handler : me.onClose
+									}];
+
+							if (me.showCloseAll || me.showCloseOthers) {
+								items.push('-');
+							}
+
+							if (me.showCloseOthers) {
+								items.push({
+											text : me.closeOthersTabsText,
+											iconCls : this.closeOtherTabsIconCls,
+											scope : me,
+											handler : me.onCloseOthers
+										});
+							}
+
+							if (me.showCloseAll) {
+								items.push({
+											text : me.closeAllTabsText,
+											iconCls : this.closeAllTabsIconCls,
+											scope : me,
+											handler : me.onCloseAll
+										});
+							}
+
+							if (me.extraItemsHead) {
+								items = me.extraItemsHead.concat(items);
+							}
+
+							if (me.extraItemsTail) {
+								items = items.concat(me.extraItemsTail);
+							}
+
+							me.menu = Ext.create('Ext.menu.Menu', {
+										items : items,
+										listeners : {
+											hide : me.onHideMenu,
+											scope : me,
+											delay : 1
+										}
+									});
+						}
+
+						return me.menu;
+					}
 				});
 		/* 计算两日期相差的日期年月日等 */
 		Date.prototype.dateDiff = function(interval, objDate) {
@@ -115,31 +168,9 @@ Ext.application({
 		});
 		Ext.create('Ext.container.Viewport', {
 					layout : 'border',
-					items : [{
-								region : 'north',
-								xtype : 'north',
-								height : 60,
-								margins : '0 5 0 5'
-							}, {
-								title : '菜單',
-								region : 'west',
-								xtype : 'west',
-								margins : '0 0 0 5',
-								width : 200,
-								collapsible : true,
-								layout : 'fit'
-							}, {
-								region : 'center',
-								xtype : 'center',
-								layout : 'fit',
-								height : 683,
-								margins : '0 5 0 0'
-							}, {
-								region : 'south',
-								xtype : 'south',
-								height : 25,
-								margins : '0 5 0 5'
-							}]
+					items : {
+						xtype : 'loginform'
+					}
 				});
 	}
 });

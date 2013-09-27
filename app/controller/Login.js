@@ -37,9 +37,33 @@ Ext.define('Zixweb.controller.Login', {
 													});
 											return;
 										}
-										Ext.MessageBox.wait('登录成功，努力加载中...',
-												'请稍等');
-										window.location.href = "/index.html";
+										var viewport = panel.up('viewport');
+										viewport.removeAll();
+										viewport.add([{
+													region : 'north',
+													xtype : 'north',
+													height : 60,
+													margins : '0 5 0 5'
+												}, {
+													title : '菜單',
+													region : 'west',
+													xtype : 'west',
+													margins : '0 0 0 5',
+													width : 200,
+													collapsible : true,
+													layout : 'fit'
+												}, {
+													region : 'center',
+													xtype : 'center',
+													layout : 'fit',
+													height : 683,
+													margins : '0 5 0 0'
+												}, {
+													region : 'south',
+													xtype : 'south',
+													height : 25,
+													margins : '0 5 0 5'
+												}]);
 									} else {
 										Ext.MessageBox.show({
 													title : '警告',

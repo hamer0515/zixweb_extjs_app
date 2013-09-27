@@ -219,8 +219,9 @@ Ext.define('Zixweb.view.task.Taskpzcx', {
 														+ rec.data.ys_type
 														+ rec.data.ys_id,
 												title : '凭证' + rec.data.ys_type
+														+ '撤销审核编号'
+														+ rec.data.id
 														+ '详细信息-'
-														+ rec.data.ys_id
 											}).show();
 										}
 										viewport.doLayout();

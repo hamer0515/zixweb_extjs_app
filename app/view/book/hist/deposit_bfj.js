@@ -273,8 +273,8 @@ Ext.define('Zixweb.view.book.hist.deposit_bfj', {
 														+ rec.data.ys_type
 														+ rec.data.ys_id,
 												title : '凭证' + rec.data.ys_type
-														+ '详细信息-'
-														+ rec.data.ys_id
+														+ '编号' + rec.data.ys_id
+														+ '详细信息'
 											}).show();
 										}
 										viewport.doLayout();

@@ -214,7 +214,9 @@ Ext.define('Zixweb.view.task.Taskmy', {
 											center.setActiveTab(cmp);
 										} else {
 											var taskmy;
+											var t = '';
 											if (parseInt(rec.data.shtype) == 1) {
+												t = '特种调账单录入';
 												taskmy = Ext
 														.createByAlias('widget.task0000detail');
 												taskmy.store.load({
@@ -225,6 +227,7 @@ Ext.define('Zixweb.view.task.Taskmy', {
 														});
 
 											} else if (parseInt(rec.data.shtype) == 2) {
+												t = '凭证撤销';
 												taskmy = Ext
 														.createByAlias('widget.taskpzcxdetail');
 												taskmy.store.load({
@@ -237,13 +240,13 @@ Ext.define('Zixweb.view.task.Taskmy', {
 												});
 											}
 											center.add({
-														closable : true,
-														xtype : 'panel',
-														items : taskmy,
-														id : id,
-														title : '我的任务-'
-																+ rec.data.id
-													}).show();
+												closable : true,
+												xtype : 'panel',
+												items : taskmy,
+												id : id,
+												title : '我的' + t
+														+ '任務编号'+rec.data.id+'详细信息'
+											}).show();
 										}
 										viewport.doLayout();
 									}

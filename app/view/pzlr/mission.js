@@ -606,9 +606,8 @@ Ext.define('Zixweb.view.pzlr.mission', {
 												xtype : 'panel',
 												items : pzlrjob,
 												id : 'job_' + rec.data.id,
-												title : Ext.String.ellipsis(
-														'任务' + rec.data.id, 8,
-														true)
+												title : 
+														'任务' + rec.data.id+'详细信息'
 											}).show();
 											viewport.doLayout();
 										}

@@ -95,11 +95,9 @@ Ext.define('Zixweb.view.book.ZyzjBooks', {
 													+ rec.data.url
 										},
 										id : 'book_detail_' + rec.data.url,
-										title : Ext.String.ellipsis(
-												rec.data.text.substr(0,
-														rec.data.text
-																.indexOf("-"))
-														+ '科目详细', 8, true)
+										title : rec.data.text.substr(0,
+												rec.data.text.indexOf("-"))
+												+ '科目详细'
 									}).show();
 									viewport.doLayout();
 								}
@@ -125,11 +123,9 @@ Ext.define('Zixweb.view.book.ZyzjBooks', {
 											xtype : 'book_hist_' + rec.data.url
 										},
 										id : 'book_hist_' + rec.data.url,
-										title : Ext.String.ellipsis(
-												rec.data.text.substr(0,
-														rec.data.text
-																.indexOf("-"))
-														+ '科目历史信息', 8, true)
+										title : rec.data.text.substr(0,
+												rec.data.text.indexOf("-"))
+												+ '科目历史信息'
 									}).show();
 									viewport.doLayout();
 								}
